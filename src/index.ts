@@ -20,7 +20,7 @@ function kabegamiURL (page = 1) {
   if (page == 1) {
     return kabegami
   } else {
-    return `${kabegami}page/${page}`
+    return `${kabegami}page/${page}/`
   }
 }
 
