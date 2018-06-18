@@ -8,7 +8,9 @@
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsc -w",
-    "ext:watch": "webpack --watch"
+    "ext:watch": "webpack --watch",
+    "ext:build": "cross-env NODE_ENV=production webpack && npm run archive",
+    "archive": "node ./bin/archive"
   },
   "author": "Yukai Huang",
   "license": "MIT",
@@ -21,8 +23,10 @@
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.7",
+    "archiver": "^2.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
+    "cross-env": "^5.2.0",
     "ts-loader": "^4.4.1",
     "typescript": "^2.9.2",
     "webpack": "^4.12.0",

@@ -31,4 +31,12 @@ let webpackConfig = {
   }
 };
 
+if (process.env.NODE_ENV === 'production') {
+  webpackConfig.plugins = webpackConfig.plugins.concat([
+    new CleanWebpackPlugin([
+      path.join(__dirname, 'extension_dist')
+    ])
+  ])
+}
+
 module.exports = webpackConfig;

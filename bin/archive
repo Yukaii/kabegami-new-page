@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+const archiver = require('archiver');
+const fs = require('fs');
+const path = require('path');
+
+const output = fs.createWriteStream(path.join(__dirname, '../extension.zip'));
+
+const archive = archiver('zip', {
+  zlib: { level: 9 }
+});
+
+archive.directory(path.join(__dirname, '../extension_dist/'), false);
+archive.pipe(output);
+archive.finalize();
