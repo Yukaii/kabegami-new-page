@@ -2,6 +2,9 @@
   "name": "kanahei-wallpapers",
   "version": "1.0.0",
   "description": "A utility to download all kanahei wallpapers",
+  "bin": {
+    "kanahei": "dist/cli.js"
+  },
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsc -w"
@@ -11,6 +14,8 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "cross-fetch": "^2.2.1",
+    "got": "^8.3.1",
+    "tempfile": "^2.0.0",
     "wallpaper": "^3.0.0"
   },
   "devDependencies": {

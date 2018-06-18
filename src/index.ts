@@ -58,21 +58,31 @@ function oneToN (count: number) {
   return Math.floor(Math.random() * count) + 1
 }
 
-async function run () {
-  const pageCount = await fetchPageCount()
-
-  const randomPageCount = oneToN(pageCount)
-  const randomPageURL = kabegamiURL(randomPageCount)
-
-  const wallpaper = getRandomWallpaper(await fetchPage(randomPageURL))
-
-  process.stdout.write(wallpaper.images[wallpaper.images.length - 1])
-}
-
 async function fetchPageCount () {
   const html = await fetchPage(kabegami)
   const $ = cheerio.load(html)
   return parsePagesCount($)
 }
 
-run()
+export async function getOne () {
+  const pageCount = await fetchPageCount()
+
+  const randomPageCount = oneToN(pageCount)
+  const randomPageURL = kabegamiURL(randomPageCount)
+
+  return getRandomWallpaper(await fetchPage(randomPageURL))
+}
+
+export async function getAll () {
+  const pageCount = await fetchPageCount()
+
+  const arraysOfWallpapers = await Promise.all(Array.from({length: pageCount}, (_, k) => k+1).map(async page => {
+    const pageURL = kabegamiURL(page)
+    const html = await fetchPage(pageURL)
+
+    const $ = cheerio.load(html)
+    return parseWallpapers($)
+  }))
+
+  return arraysOfWallpapers.reduce((all, ws) => all.concat(ws), [])
+}
