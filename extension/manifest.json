@@ -1,0 +1,8 @@
+{
+  "name": "Kanahei's New Page",
+  "description": "Random kanahei's wallpaper on new page",
+  "version": "0.1.0",
+  "incognito": "split",
+  "chrome_url_overrides": {"newtab": "index.html"},
+  "manifest_version": 2
+}
