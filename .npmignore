@@ -5,3 +5,6 @@ node_modules
 .vscode
 docs
 bin
+*.zip
+tsconfig.json
+webpack.config.js
