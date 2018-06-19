@@ -8,9 +8,11 @@
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsc -w",
+    "build": "tsc",
     "ext:watch": "webpack --watch",
     "ext:build": "cross-env NODE_ENV=production webpack && npm run archive",
-    "archive": "node ./bin/archive"
+    "archive": "node ./bin/archive",
+    "prepublish": "npm run build"
   },
   "author": "Yukai Huang",
   "license": "MIT",

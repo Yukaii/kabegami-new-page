@@ -3,3 +3,5 @@ extension
 extension_dist
 node_modules
 .vscode
+docs
+bin
