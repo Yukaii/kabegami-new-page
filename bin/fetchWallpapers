@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const fs = require('fs')
+
+if (!fs.existsSync(path.join(__dirname, '../dist/index.js'))) {
+  throw new TypeError('Please run `npm run build` first.')
+}
+
+const { getAll } = require('../dist/index')
+
+getAll().then(wallpapers => {
+  fs.writeFileSync(path.join(__dirname, '../extension/wallpapers.json'), JSON.stringify({ wallpapers }, null, 2))
+})

@@ -1,7 +1,9 @@
-import { getOne } from './index'
+const wallpapersStore = require('../extension/wallpapers.json')
 
 window.onload = async function () {
-  const wallpaper = await getOne();
+  const wallpapers = wallpapersStore.wallpapers
+  const wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+
   const image = wallpaper.images[0]
 
   const img = document.createElement('img')

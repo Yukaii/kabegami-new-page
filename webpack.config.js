@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 let webpackConfig = {
+  mode: 'production',
   entry: {
     page: './src/page',
   },
