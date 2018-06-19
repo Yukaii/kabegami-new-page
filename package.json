@@ -1,11 +1,12 @@
 {
   "name": "kanahei-wallpapers",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A utility to download all kanahei wallpapers",
   "bin": {
     "kanahei": "dist/cli.js"
   },
   "main": "dist/index.js",
+  "browser": "dist/index.js",
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc",
@@ -14,7 +15,23 @@
     "archive": "node ./bin/archive",
     "prepublish": "npm run build"
   },
-  "author": "Yukai Huang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yukaii/kanahei-wallpapers.git"
+  },
+  "keywords": [
+    "kanahei",
+    "wallpaper-cli",
+    "fun"
+  ],
+  "author": {
+    "name": "Yukai Huang",
+    "email": "yukaihuangtw@gmail.com",
+    "url": "https://yukaii.tw"
+  },
+  "files": [
+    "dist/*"
+  ],
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
