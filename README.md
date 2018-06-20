@@ -6,6 +6,8 @@
 
 ## NPM Pakcage
 
+[![npm](https://img.shields.io/npm/v/kanahei-wallpapers.svg)](https://www.npmjs.com/package/kanahei-wallpapers)
+
 ```bash
 npm install -g kanahei-wallpapers
 ```
