@@ -5,6 +5,10 @@
     "outDir": "dist",
     "rootDir": "src",
     "inlineSourceMap": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+  },
+  "include": [
+    "./src/**/*"
+  ]
 }

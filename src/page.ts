@@ -1,4 +1,6 @@
 const wallpapersStore = require('../extension/wallpapers.json')
+import 'primer/index.scss';
+import './app';
 
 window.onload = async function () {
   const wallpapers = wallpapersStore.wallpapers
