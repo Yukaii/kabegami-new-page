@@ -1,6 +1,5 @@
 const wallpapersStore = require('../extension/wallpapers.json')
 import 'primer/index.scss';
-import './app';
 
 window.onload = async function () {
   const wallpapers = wallpapersStore.wallpapers
@@ -20,5 +19,7 @@ window.onload = async function () {
     body.appendChild(imageContainer)
 
     window.setTimeout(() => document.querySelector('.image-container').className = 'image-container', 0)
+
+    require('./app');
   }
 }

@@ -10,6 +10,7 @@ const devMode = process.env.NODE_ENV === 'production';
 
 let webpackConfig = {
   mode: 'production',
+  devtool: 'source-map',
   entry: {
     page: './src/page',
   },
