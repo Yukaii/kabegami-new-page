@@ -4,6 +4,9 @@
     <div class="menu-container float-left col-3 p-3">
       <nav class="menu">
         <a class="menu-item" :class="{selected: isMenuActive(collection)}" :key="collection.id" v-for="collection of collections" @click.prevent="selectCollection(collection)">{{ collection.name }}</a>
+        <div class="menu-item d-flex flex-justify-end">
+          <button class="btn btn-primary">Add</button>
+        </div>
       </nav>
     </div>
     <div class="gallery-container" @wheel="scrollBarWheel" ref="galleryContainer">
@@ -11,12 +14,51 @@
         <img :src="image" alt="thumbnail" width="240" height="180">
       </div>
     </div>
+
+    <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast" id="add_collection">
+      <div class="Box-header">
+        <h3 class="Box-title">Add new collection</h3>
+      </div>
+      <div class="overflow-auto">
+        <div class="Box-body overflow-auto">
+          <p>
+            You can select a folder:
+            <input
+              class="form-control"
+              type="file"
+              id="filepicker"
+              name="fileList"
+              webkitdirectory multiple
+              ref="collectionFiles"
+              @change="collectionFileChange" />
+          <p>
+          <p>{{ JSON.stringify(selectedFiles) }}</p>
+          <p>or paste image urls below:</p>
+          <dl class="form-group">
+            <dd>
+              <textarea class="form-control" name="inputImageUrls" cols="30" rows="5" :placeholder="textareaExample"></textarea>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="Box-footer">
+        <button type="button" class="btn" autofocus data-close-dialog>Cancel</button>
+        <button type="button" class="btn btn-primary float-right" autofocus data-close-dialog>Create</button>
+      </div>
+    </details-dialog>
+
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 const wallpapersStore = require('../../extension/wallpapers.json')
+
+const textareaExample = [
+  'https://i.imgur.com/7Fu38N.png',
+  'https://i.imgur.com/nj37z.png',
+  'https://i.imgur.com/9k3j8.png'
+]
 
 const collectionStore = {
   0: {
@@ -39,7 +81,8 @@ export default Vue.extend({
   data () {
     return {
       selectedCollectionId: collectionIds[0],
-      selectedIndex: 0
+      selectedIndex: 0,
+      selectedFiles: []
     }
   },
   methods: {
@@ -65,6 +108,10 @@ export default Vue.extend({
       }
 
       this.selectedCollectionId = collection.id;
+    },
+
+    collectionFileChange () {
+      // this.selectedFiles = this.$refs.collectionFiles.files.map(file => URL.createObjectURL(file));
     }
   },
   computed: {
@@ -84,6 +131,10 @@ export default Vue.extend({
 
     collections () {
       return collectionIds.map(id => ({...collectionStore[id], id }));
+    },
+
+    textareaExample () {
+      return textareaExample.join('\n');
     }
   }
 })
@@ -160,5 +211,17 @@ export default Vue.extend({
       object-fit: cover;
     }
   }
+}
+
+#add_collection {
+  width: 480px;
+  left: calc(50vw - 240px);
+  top: calc(50vh - 170px);
+  position: fixed;
+}
+
+textarea[name="inputImageUrls"] {
+  height: 100px;
+  min-height: 100px;
 }
 </style>
