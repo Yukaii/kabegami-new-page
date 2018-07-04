@@ -52,6 +52,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Component from 'vue-class-component';
 const wallpapersStore = require('../../extension/wallpapers.json')
 
 const textareaExample = [
@@ -77,67 +78,62 @@ const collectionStore = {
 
 const collectionIds = [0, 1]
 
-export default Vue.extend({
-  data () {
-    return {
-      selectedCollectionId: collectionIds[0],
-      selectedIndex: 0,
-      selectedFiles: []
-    }
-  },
-  methods: {
-    scrollBarWheel (event) {
-      this.$refs.galleryContainer.scrollLeft -= event.wheelDeltaY / 3
-    },
+@Component
+export default class App extends Vue {
+  selectedCollectionId = collectionIds[0]
+  selectedIndex =  0
+  selectedFiles =  []
 
-    isActive (index: number) {
-      return index === this.selectedIndex ? 'active' : null;
-    },
-
-    isMenuActive (collection) {
-      return collection.id === this.selectedCollectionId;
-    },
-
-    selectWallpaper (index) {
-      this.selectedIndex = index;
-    },
-
-    selectCollection (collection) {
-      if (this.selectedCollectionId !== collection.id) {
-        this.selectedIndex = 0;
-      }
-
-      this.selectedCollectionId = collection.id;
-    },
-
-    collectionFileChange () {
-      // this.selectedFiles = this.$refs.collectionFiles.files.map(file => URL.createObjectURL(file));
-    }
-  },
-  computed: {
-    selectedWallpaper () {
-      return this.images[this.selectedIndex];
-    },
-
-    wallpaperStyle () {
-      return {
-        backgroundImage: `url(${this.selectedWallpaper})`
-      };
-    },
-
-    images () {
-      return collectionStore[this.selectedCollectionId].images;
-    },
-
-    collections () {
-      return collectionIds.map(id => ({...collectionStore[id], id }));
-    },
-
-    textareaExample () {
-      return textareaExample.join('\n');
-    }
+  scrollBarWheel (event) {
+    (this.$refs.galleryContainer as Element).scrollLeft -= event.wheelDeltaY / 3
   }
-})
+
+  isActive (index: number) {
+    return index === this.selectedIndex ? 'active' : null;
+  }
+
+  isMenuActive (collection) {
+    return collection.id === this.selectedCollectionId;
+  }
+
+  selectWallpaper (index) {
+    this.selectedIndex = index;
+  }
+
+  selectCollection (collection) {
+    if (this.selectedCollectionId !== collection.id) {
+      this.selectedIndex = 0;
+    }
+
+    this.selectedCollectionId = collection.id;
+  }
+
+  collectionFileChange () {
+    // this.selectedFiles = this.$refs.collectionFiles.files.map(file => URL.createObjectURL(file));
+  }
+
+  get selectedWallpaper () {
+    return this.images[this.selectedIndex];
+  }
+
+  get wallpaperStyle () {
+    return {
+      backgroundImage: `url(${this.selectedWallpaper})`
+    };
+  }
+
+  get images () {
+    return collectionStore[this.selectedCollectionId].images;
+  }
+
+  get collections () {
+    return collectionIds.map(id => ({...collectionStore[id], id }));
+  }
+
+  get textareaExample () {
+    return textareaExample.join('\n');
+  }
+}
 </script>
 
 <style lang="scss" scoped>

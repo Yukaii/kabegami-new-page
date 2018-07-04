@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2015",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "experimentalDecorators": true,
     "module": "commonjs",
     "outDir": "dist",
     "rootDir": "src",
@@ -11,5 +16,8 @@
       "node_modules/@types",
       "src/@types"
     ]
-  }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
