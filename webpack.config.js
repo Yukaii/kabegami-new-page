@@ -54,6 +54,17 @@ let webpackConfig = {
     }, {
       test: /\.vue$/,
       loader: 'vue-loader'
+    }, {
+      test: /\.svg$/,
+      loader: 'vue-svg-loader',
+      options: {
+        svgo: {
+          plugins: [
+            {removeDoctype: true},
+            {removeComments: true}
+          ]
+        }
+      }
     }]
   }
 };
