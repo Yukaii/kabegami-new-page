@@ -37,15 +37,19 @@
     "cheerio": "^1.0.0-rc.2",
     "cross-fetch": "^2.2.1",
     "got": "^8.3.1",
+    "localforage": "^1.7.2",
+    "p-iteration": "^1.1.7",
     "primer": "^10.6.1",
     "tempfile": "^2.0.0",
     "vue": "^2.5.16",
     "vue-class-component": "^6.2.0",
     "vue-property-decorator": "^7.0.0",
-    "wallpaper": "^3.0.0"
+    "wallpaper": "^3.0.0",
+    "webextension-polyfill": "^0.2.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.7",
+    "@types/firefox-webext-browser": "^58.0.3",
     "archiver": "^2.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",

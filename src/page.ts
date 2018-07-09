@@ -18,8 +18,10 @@ window.onload = async function () {
 
     body.appendChild(imageContainer)
 
-    window.setTimeout(() => document.querySelector('.image-container').className = 'image-container', 0)
+    window.setTimeout(() => {
+      document.querySelector('.image-container').className = 'image-container'
 
-    require('./app');
+      window.setTimeout(() => require('./app'), 300);
+    }, 0)
   }
 }

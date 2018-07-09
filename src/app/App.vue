@@ -12,10 +12,11 @@
       <div class="menu-container float-left col-3 p-3">
         <nav class="menu">
           <a class="menu-item" :class="{selected: isMenuActive(collection)}" :key="collection.id" v-for="collection of collections" @click.prevent="selectCollection(collection)">{{ collection.name }}</a>
-          <div class="menu-item d-flex flex-justify-end">
-            <button class="btn btn-primary" @click="prepareAddCollection">Add</button>
-          </div>
         </nav>
+        <div class="d-flex flex-justify-between">
+          <button class="btn">Edit</button>
+          <button class="btn btn-primary" @click="prepareAddCollection">Add</button>
+        </div>
       </div>
       <div class="gallery-container" @wheel="scrollBarWheel" ref="galleryContainer">
         <div v-for="(image, idx) of images" :key="image" class="thumbnail" :class="isActive(idx)" @click="selectWallpaper(idx)">
@@ -71,6 +72,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component';
+import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections } from './lib/store'
+
 const ConfigIcon = require('../../extension/config.svg');
 const wallpapersStore = require('../../extension/wallpapers.json')
 
@@ -80,34 +83,20 @@ const textareaExample = [
   'https://i.imgur.com/9k3j8.png'
 ]
 
-const collectionStore = {
-  0: {
-    name: 'カナヘイ',
-    images: wallpapersStore.wallpapers.map(w => w.images[1]).slice(0, 20)
-  },
-  1: {
-    name: 'Snoopy',
-    images: [
-      'https://pre00.deviantart.net/5b5d/th/pre/f/2018/063/a/5/snoopy_wallpaper_by_turbomixelgamer-dc4yt4t.png',
-      'http://kb4images.com/images/snoopy-wallpaper/36870860-snoopy-wallpaper.jpg',
-      'https://wallpaper.wiki/wp-content/uploads/2017/05/Snoopy-And-Charlie-Brown-The-Peanuts-Movie-Wallpaper.jpg'
-    ]
-  }
-}
-
-const collectionIds = [0, 1]
-
 @Component({
   components: {
     ConfigIcon
   }
 })
 export default class App extends Vue {
-  selectedCollectionId = collectionIds[0]
+  selectedCollectionId = null
   selectedIndex =  0
   selectedFiles =  []
   inConfig = false
   isAddingCollection = false
+
+  collections: ICollection[] = []
+  imageStore: { [key: string]: IImage }
 
   scrollBarWheel (event) {
     (this.$refs.galleryContainer as Element).scrollLeft -= event.wheelDeltaY / 3
@@ -153,6 +142,19 @@ export default class App extends Vue {
     // this.selectedFiles = this.$refs.collectionFiles.files.map(file => URL.createObjectURL(file));
   }
 
+  async mounted () {
+    await installDefaultCollections();
+
+    // load existing collections and images
+    this.collections = await CollectionStore.all();
+    this.imageStore = await ImageStore.getStore();
+    this.selectedCollectionId = this.collections[0].id;
+  }
+
+  get selectedCollection () {
+    return this.collections.find(c => c.id === this.selectedCollectionId);
+  }
+
   get selectedWallpaper () {
     return this.images[this.selectedIndex];
   }
@@ -164,11 +166,14 @@ export default class App extends Vue {
   }
 
   get images () {
-    return collectionStore[this.selectedCollectionId].images;
-  }
-
-  get collections () {
-    return collectionIds.map(id => ({...collectionStore[id], id }));
+    if (this.selectedCollection) {
+      return this.selectedCollection.imageIds.map(imageId => {
+        const image = this.imageStore[imageId]
+        return image && image.path;
+      })
+    } else {
+      return []
+    }
   }
 
   get textareaExample () {
