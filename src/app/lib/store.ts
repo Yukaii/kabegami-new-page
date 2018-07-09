@@ -39,7 +39,7 @@ export class Store<T extends IModel> {
     return this.getStorage();
   }
 
-  async all () {
+  async all (): Promise<T[]> {
     const dataStorage = await this.getStorage();
     const dataIds = Object.keys(dataStorage);
 
@@ -99,6 +99,33 @@ export class Store<T extends IModel> {
 export const CollectionStore = Store.factory<ICollection>('collections');
 export const ImageStore = Store.factory<IImage>('images');
 
+export interface IConfiguration {
+  selectedCollectionId: string;
+}
+
+export class Configuration {
+  private static storePrefix = 'config'
+
+  static getAll (): Promise<IConfiguration | undefined> {
+    return storage.getItem(this.storePrefix);
+  }
+
+  static async set (key: keyof IConfiguration, value: any) {
+    const config = await this.getAll();
+
+    await storage.setItem(this.storePrefix, {
+      ...config,
+      [key]: value
+    })
+
+    return await this.getAll();
+  }
+
+  static async get (key: keyof IConfiguration) {
+    return await this.getAll()[key];
+  }
+}
+
 type DefaultCollection = { name: string, images: string[] }
 
 const defaultCollections: DefaultCollection[] = [{
@@ -113,7 +140,7 @@ const defaultCollections: DefaultCollection[] = [{
 export async function installDefaultCollections () {
   const collections = await CollectionStore.all();
 
-  return forEachSeries(defaultCollections, async defaultCollection => {
+  await forEachSeries(defaultCollections, async defaultCollection => {
     // default collection name not exist
     if (!collections.map(c => c.name).includes(defaultCollection.name)) {
 
@@ -129,5 +156,16 @@ export async function installDefaultCollections () {
       // TODO: update new default sets
       // this can be done after auto enabling auto extension build
     }
-  }, []);
+  });
+
+  if (collections.length === 0) {
+    // pre-select default collection
+    const newCollections = await CollectionStore.all()
+    await Configuration.set('selectedCollectionId', newCollections[0].id)
+  } else {
+    const config = await Configuration.getAll();
+    if (!(config && config.selectedCollectionId)) {
+      await Configuration.set('selectedCollectionId', collections[0].id)
+    }
+  }
 }

@@ -72,7 +72,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component';
-import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections } from './lib/store'
+import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections, Configuration, IConfiguration } from './lib/store'
 
 const ConfigIcon = require('../../extension/config.svg');
 const wallpapersStore = require('../../extension/wallpapers.json')
@@ -94,6 +94,7 @@ export default class App extends Vue {
   selectedFiles =  []
   inConfig = false
   isAddingCollection = false
+  config : IConfiguration
 
   collections: ICollection[] = []
   imageStore: { [key: string]: IImage }
@@ -133,7 +134,7 @@ export default class App extends Vue {
   }
 
   saveConfig () {
-    // TODO: save config
+    Configuration.set('selectedCollectionId', this.selectedCollectionId)
 
     this.inConfig = false
   }
@@ -148,7 +149,9 @@ export default class App extends Vue {
     // load existing collections and images
     this.collections = await CollectionStore.all();
     this.imageStore = await ImageStore.getStore();
-    this.selectedCollectionId = this.collections[0].id;
+    this.config = await Configuration.getAll();
+
+    this.selectedCollectionId = this.config.selectedCollectionId;
   }
 
   get selectedCollection () {
@@ -272,7 +275,7 @@ textarea[name="inputImageUrls"] {
   right: 1em;
   bottom: 1em;
   opacity: 0.4;
-  transition: opacity ease-in-out .5s;
+  transition: opacity ease-in-out .3s;
   cursor: pointer;
 
   &:hover {
