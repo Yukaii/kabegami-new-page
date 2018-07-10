@@ -26,43 +26,57 @@
 
     </div>
 
-    <div
-      v-show="isAddingCollection"
-    >
-
+    <div v-show="isAddingCollection" class="dialog-container" >
       <details-dialog
         class="Box Box--overlay d-flex flex-column"
         id="add_collection"
       >
+      <form ref="collectionForm">
         <div class="Box-header">
           <h3 class="Box-title">Add new collection</h3>
         </div>
         <div class="overflow-auto">
           <div class="Box-body overflow-auto">
-            <p>
-              You can select a folder:
-              <input
-                class="form-control"
-                type="file"
-                id="filepicker"
-                name="fileList"
-                webkitdirectory multiple
-                ref="collectionFiles"
-                @change="collectionFileChange" />
-            <p>
-            <p>{{ JSON.stringify(selectedFiles) }}</p>
-            <p>or paste image urls below:</p>
             <dl class="form-group">
+              <dt>
+                <label for="collectionFormName">Collection name</label>
+              </dt>
               <dd>
-                <textarea class="form-control" name="inputImageUrls" cols="30" rows="5" :placeholder="textareaExample"></textarea>
+                <input class="form-control" v-model="collectionFormName">
+              </dd>
+            </dl>
+
+            <dl class="form-group">
+              <dt>
+                <label for="collection-images">Add images</label>
+              </dt>
+              <p>
+                <dt>
+                  You can select a folder:
+                </dt>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="filepicker"
+                  name="fileList"
+                  webkitdirectory multiple
+                  ref="collectionFormFilesInput"
+                  @change="collectionFileChange" />
+                <dt>
+                  or paste image urls below:
+                </dt>
+              <p>
+              <dd>
+                <textarea v-model="collectionFormImageUrls" class="form-control" name="collectionFormImageUrls" cols="30" rows="5" :placeholder="textareaExample"></textarea>
               </dd>
             </dl>
           </div>
         </div>
         <div class="Box-footer">
-          <button type="button" class="btn" autofocus data-close-dialog>Cancel</button>
-          <button type="button" class="btn btn-primary float-right" autofocus data-close-dialog>Create</button>
+          <button type="button" class="btn" @click="cancelCollectionForm">Cancel</button>
+          <button type="button" class="btn btn-primary float-right">Create</button>
         </div>
+      </form>
       </details-dialog>
     </div>
 
@@ -95,6 +109,10 @@ export default class App extends Vue {
   inConfig = false
   isAddingCollection = false
   config : IConfiguration
+
+  collectionFormImageUrls
+  collectionFormName
+  collectionFormFiles
 
   collections: ICollection[] = []
   imageStore: { [key: string]: IImage }
@@ -140,7 +158,17 @@ export default class App extends Vue {
   }
 
   collectionFileChange () {
-    // this.selectedFiles = this.$refs.collectionFiles.files.map(file => URL.createObjectURL(file));
+    this.collectionFormFiles = (this.$refs.collectionFormFilesInput as HTMLInputElement).files
+  }
+
+  cancelCollectionForm () {
+    // reset input files
+    (this.$refs.collectionForm as any).reset()
+
+    this.collectionFormImageUrls = undefined
+    this.collectionFormName = undefined
+
+    this.isAddingCollection = false
   }
 
   async mounted () {
@@ -260,12 +288,19 @@ export default class App extends Vue {
 
 #add_collection {
   width: 480px;
-  left: calc(50vw - 240px);
-  top: calc(50vh - 170px);
-  position: fixed;
 }
 
-textarea[name="inputImageUrls"] {
+.dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+textarea[name="collectionFormImageUrls"] {
   height: 100px;
   min-height: 100px;
 }
