@@ -34,20 +34,37 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "cross-fetch": "^2.2.1",
     "got": "^8.3.1",
+    "localforage": "^1.7.2",
+    "p-iteration": "^1.1.7",
+    "primer": "^10.6.1",
     "tempfile": "^2.0.0",
-    "wallpaper": "^3.0.0"
+    "vue": "^2.5.16",
+    "vue-class-component": "^6.2.0",
+    "vue-property-decorator": "^7.0.0",
+    "wallpaper": "^3.0.0",
+    "webextension-polyfill": "^0.2.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.7",
+    "@types/firefox-webext-browser": "^58.0.3",
     "archiver": "^2.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "ts-loader": "^4.4.1",
     "typescript": "^2.9.2",
+    "vue-loader": "^15.2.4",
+    "vue-svg-loader": "^0.5.0",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.8"
   }
