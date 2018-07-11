@@ -7,7 +7,7 @@
 
     <button class="btn btn-primary finish-config-button" v-if="inConfig" @click.prevent="saveConfig">Finish</button>
 
-    <div v-show="inConfig">
+    <div v-show="inConfig" class="config-ui-container">
       <div id="wallpaper" :style="wallpaperStyle"></div>
       <div class="menu-container float-left col-3 p-3">
         <nav class="menu">
@@ -349,6 +349,10 @@ export default class App extends Vue {
   left: 0;
 
   overflow: hidden;
+
+  .config-ui-container {
+    background-color: white;
+  }
 }
 
 .menu-container {
