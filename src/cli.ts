@@ -6,7 +6,7 @@ const wallpaper = require('wallpaper');
 const got = require('got');
 const tempfile = require('tempfile');
 
-import { getOne } from './index'
+import { getOne } from '.'
 
 const main = async () => {
   const w = await getOne()

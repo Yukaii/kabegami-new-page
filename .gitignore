@@ -76,3 +76,5 @@ dist
 
 extension_dist
 *.zip
+
+src/app/config.ts

@@ -31,7 +31,7 @@
         class="Box Box--overlay d-flex flex-column"
         id="add_collection"
       >
-      <form ref="collectionForm">
+      <form ref="collectionForm" @change="validateCollectionForm">
         <div class="Box-header">
           <h3 class="Box-title">Add new collection</h3>
         </div>
@@ -63,6 +63,9 @@
                   ref="collectionFormFilesInput"
                   @change="collectionFileChange" />
                 <dt>
+                  <div v-show="isCollectionFormUploading" class="py-2 bg-green collection-upload-progressbar" :style="collectionProgressbarStyle"></div>
+                </dt>
+                <dt>
                   or paste image urls below:
                 </dt>
               <p>
@@ -74,7 +77,7 @@
         </div>
         <div class="Box-footer">
           <button type="button" class="btn" @click="cancelCollectionForm">Cancel</button>
-          <button type="button" class="btn btn-primary float-right">Create</button>
+          <button type="button" class="btn btn-primary float-right" :disabled="!isCollectionFormReady">{{ collectionFormSubmitText }}</button>
         </div>
       </form>
       </details-dialog>
@@ -87,6 +90,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component';
 import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections, Configuration, IConfiguration } from './lib/store'
+import ImageUploader from './lib/ImageUploader';
 
 const ConfigIcon = require('../../extension/config.svg');
 const wallpapersStore = require('../../extension/wallpapers.json')
@@ -112,7 +116,11 @@ export default class App extends Vue {
 
   collectionFormImageUrls
   collectionFormName
-  collectionFormFiles
+  collectionFormFiles: FileList
+  collectionUploadProgress = 0
+  collectionUploadImageUrls: string[] = []
+  isCollectionFormUploading = false
+  isCollectionFormValid = false
 
   collections: ICollection[] = []
   imageStore: { [key: string]: IImage }
@@ -157,18 +165,60 @@ export default class App extends Vue {
     this.inConfig = false
   }
 
-  collectionFileChange () {
+  async collectionFileChange () {
     this.collectionFormFiles = (this.$refs.collectionFormFilesInput as HTMLInputElement).files
+
+    if (!this.validateInputFiles()) {
+      this.resetCollectionFiles();
+
+      // TODO: flash error message
+      console.error('Only images can be uploaded')
+    } else {
+      this.isCollectionFormUploading = true
+
+      // TODO: handle thrown error
+      this.collectionUploadImageUrls = await ImageUploader.upload(this.collectionFormFiles, (progress) => {
+        this.collectionUploadProgress = progress
+      })
+      this.isCollectionFormUploading = false
+    }
+  }
+
+  validateInputFiles () {
+    for (let i = 0; i < this.collectionFormFiles.length; i++) {
+      const file = this.collectionFormFiles[i]
+
+      const fileName = file.name
+      const idxDot = fileName.lastIndexOf('.') + 1;
+      const fileExt = fileName.substr(idxDot, fileName.length).toLowerCase();
+
+      const validExtensions = ['jpg', 'jpeg', 'png', 'gif']
+
+      if (validExtensions.includes(fileExt)) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 
   cancelCollectionForm () {
-    // reset input files
-    (this.$refs.collectionForm as any).reset()
+    this.resetCollectionFiles()
+
+    ImageUploader.cancel();
+    this.isCollectionFormUploading = false
 
     this.collectionFormImageUrls = undefined
     this.collectionFormName = undefined
 
     this.isAddingCollection = false
+  }
+
+  resetCollectionFiles () {
+    // reset input files
+    (this.$refs.collectionForm as any).reset();
+
+    this.collectionUploadImageUrls = [];
   }
 
   async mounted () {
@@ -209,6 +259,33 @@ export default class App extends Vue {
 
   get textareaExample () {
     return textareaExample.join('\n');
+  }
+
+  get collectionProgressbarStyle () {
+    if (this.isCollectionFormUploading) {
+      return {
+        width: `${this.collectionUploadProgress}%`
+      }
+    } else {
+      return null
+    }
+  }
+
+  get collectionFormSubmitText () {
+    if (this.isCollectionFormUploading) {
+      return 'Uploading'
+    } else {
+      return 'Create'
+    }
+  }
+
+  get isCollectionFormReady () {
+    return !this.isCollectionFormUploading && this.isCollectionFormValid;
+  }
+
+  validateCollectionForm () {
+    this.isCollectionFormValid = (typeof this.collectionFormName !== 'undefined') &&
+        (!!this.collectionFormImageUrls || !!this.collectionUploadImageUrls) // any field is ok
   }
 }
 </script>
@@ -323,4 +400,11 @@ textarea[name="collectionFormImageUrls"] {
   right: 1em;
   top: 1em;
 }
+
+.collection-upload-progressbar {
+  transition: width ease-in-out .3s;
+  margin-top: 10px;
+  margin-right: 6px;
+}
+
 </style>
