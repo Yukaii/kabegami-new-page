@@ -50,6 +50,6 @@ window.onload = async function () {
       document.querySelector('.image-container').className = 'image-container'
 
       window.setTimeout(() => require('./app'), 300);
-    }, 0)
+    }, 100)
   }
 }
