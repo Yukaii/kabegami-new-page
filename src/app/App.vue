@@ -77,7 +77,7 @@
         </div>
         <div class="Box-footer">
           <button type="button" class="btn" @click="cancelCollectionForm">Cancel</button>
-          <button type="button" class="btn btn-primary float-right" :disabled="!isCollectionFormReady">{{ collectionFormSubmitText }}</button>
+          <button type="button" class="btn btn-primary float-right" @click="submitCollectionForm" :disabled="!isCollectionFormReady">{{ collectionFormSubmitText }}</button>
         </div>
       </form>
       </details-dialog>
@@ -90,6 +90,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component';
 import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections, Configuration, IConfiguration } from './lib/store'
+import { map } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
 
 const ConfigIcon = require('../../extension/config.svg');
@@ -121,6 +122,7 @@ export default class App extends Vue {
   collectionUploadImageUrls: string[] = []
   isCollectionFormUploading = false
   isCollectionFormValid = false
+  isSubmittingCollectionForm = false
 
   collections: ICollection[] = []
   imageStore: { [key: string]: IImage }
@@ -214,6 +216,40 @@ export default class App extends Vue {
     this.isAddingCollection = false
   }
 
+  async submitCollectionForm () {
+    this.isSubmittingCollectionForm = true
+
+    const imageIds = await this.saveUrlsToToImageStore(
+      !!this.collectionUploadImageUrls ?
+        this.collectionUploadImageUrls :
+        this.collectionFormImageUrls
+    );
+
+    await CollectionStore.create({
+      name: this.collectionFormName,
+      imageIds
+    })
+
+    await this.reloadStore();
+
+    this.cancelCollectionForm();
+
+    this.isSubmittingCollectionForm = false
+  }
+
+  async processRawImageUrls (imageUrls: string) {
+    return await this.saveUrlsToToImageStore(imageUrls.match(/https?:\/\/[^\s]+\.(png|gif|jpg|jpeg)/g))
+  }
+
+  async saveUrlsToToImageStore (urls: string[]) {
+    return await map(urls, async url => {
+      const image = await ImageStore.create({
+        path: url
+      })
+      return (image[Object.keys(image)[0]] as IImage).id
+    })
+  }
+
   resetCollectionFiles () {
     // reset input files
     (this.$refs.collectionForm as any).reset();
@@ -223,7 +259,10 @@ export default class App extends Vue {
 
   async mounted () {
     await installDefaultCollections();
+    await this.reloadStore();
+  }
 
+  async reloadStore () {
     // load existing collections and images
     this.collections = await CollectionStore.all();
     this.imageStore = await ImageStore.getStore();
@@ -280,7 +319,9 @@ export default class App extends Vue {
   }
 
   get isCollectionFormReady () {
-    return !this.isCollectionFormUploading && this.isCollectionFormValid;
+    return !this.isCollectionFormUploading &&
+           !this.isSubmittingCollectionForm &&
+           this.isCollectionFormValid;
   }
 
   validateCollectionForm () {
