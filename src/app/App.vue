@@ -11,10 +11,12 @@
       <div id="wallpaper" :style="wallpaperStyle"></div>
       <div class="menu-container float-left col-3 p-3">
         <nav class="menu">
-          <a class="menu-item" :class="{selected: isMenuActive(collection)}" :key="collection.id" v-for="collection of collections" @click.prevent="selectCollection(collection)">{{ collection.name }}</a>
+          <a class="menu-item" :class="{selected: isMenuActive(collection)}" :key="collection.id" v-for="collection of collections" @click.prevent="selectCollection(collection)">
+            {{ collection.name }}
+            <img src="block.png" v-if="!collection.protected" class="delete-collection-icon" @click="deleteCollection(collection)" alt="">
+          </a>
         </nav>
-        <div class="d-flex flex-justify-between">
-          <button class="btn">Edit</button>
+        <div class="d-flex flex-justify-end">
           <button class="btn btn-primary" @click="prepareAddCollection">Add</button>
         </div>
       </div>
@@ -149,6 +151,13 @@ export default class App extends Vue {
     }
 
     this.selectedCollectionId = collection.id;
+  }
+
+  async deleteCollection(collection) {
+    if (!collection.protected) {
+      await CollectionStore.delete(collection);
+      await this.reloadStore()
+    }
   }
 
   prepareAddCollection () {
@@ -351,6 +360,22 @@ export default class App extends Vue {
   .menu-item {
     user-select: none;
     text-overflow: ellipsis;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      .delete-collection-icon {
+        display: inline;
+      }
+    }
+
+    .delete-collection-icon {
+      height: 21px;
+      display: none;
+      cursor: pointer;
+    }
   }
 }
 

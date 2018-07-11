@@ -6,6 +6,7 @@ const kanaheiWallpapers = require('../../../extension/wallpapers.json')
 
 interface IModel extends Object {
   id?: string;
+  protected?: boolean;
   createdAt?: number;
   updatedAt?: number;
 }
@@ -150,6 +151,7 @@ export async function installDefaultCollections () {
 
       return await CollectionStore.create({
         name: defaultCollection.name,
+        protected: true,
         imageIds
       });
     } else {
