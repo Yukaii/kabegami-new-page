@@ -2,7 +2,7 @@ import { uuid } from './utils';
 import * as localforge from 'localforage'
 import { mapSeries, forEachSeries } from 'p-iteration';
 
-const kanaheiWallpapers = require('../../../extension/wallpapers.json')
+const kanaheiWallpapers = require('../../wallpapers.json')
 
 interface IModel extends Object {
   id?: string;

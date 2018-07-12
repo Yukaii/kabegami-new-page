@@ -6,10 +6,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const devMode = process.env.NODE_ENV === 'production';
+const devMode = !(process.env.NODE_ENV === 'production');
 
 let webpackConfig = {
-  mode: 'production',
+  mode: devMode ? 'development' : 'production',
   devtool: 'source-map',
   entry: {
     page: './src/page',
@@ -18,11 +18,11 @@ let webpackConfig = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CopyWebpackPlugin([{
       from: '*',
-      context: 'extension'
+      context: 'src',
+      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js']
     }]),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: '[name].css'
     }),
     new VueLoaderPlugin()
   ],

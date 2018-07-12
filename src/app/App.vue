@@ -95,8 +95,8 @@ import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefault
 import { map } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
 
-const ConfigIcon = require('../../extension/config.svg');
-const wallpapersStore = require('../../extension/wallpapers.json')
+const ConfigIcon = require('../config.svg');
+const wallpapersStore = require('../wallpapers.json')
 
 const textareaExample = [
   'https://i.imgur.com/7Fu38N.png',

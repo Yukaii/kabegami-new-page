@@ -1,4 +1,4 @@
-const wallpapersStore = require('../extension/wallpapers.json')
+const wallpapersStore = require('./wallpapers.json')
 import { CollectionStore, ImageStore, Configuration, IConfiguration } from './app/lib/store'
 import 'primer/index.scss';
 
