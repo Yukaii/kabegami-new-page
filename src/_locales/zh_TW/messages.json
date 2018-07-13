@@ -1,0 +1,45 @@
+{
+  "submit": {
+    "message": "送出"
+  },
+
+  "finish": {
+    "message": "完成"
+  },
+
+  "add": {
+    "message": "新增"
+  },
+
+  "cancel": {
+    "message": "取消"
+  },
+
+  "uploading": {
+    "message": "上傳中"
+  },
+
+  "create": {
+    "message": "建立"
+  },
+
+  "addNewCollection": {
+    "message": "新增桌布集"
+  },
+
+  "collectionName": {
+    "message": "桌布集名稱"
+  },
+
+  "addImages": {
+    "message": "加入圖片"
+  },
+
+  "selectFolder": {
+    "message": "你可以選擇一個資料夾："
+  },
+
+  "pasteUrls": {
+    "message": "或是貼上圖片網址（一行一個）"
+  }
+}

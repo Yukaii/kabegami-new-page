@@ -5,7 +5,7 @@
       <config-icon></config-icon>
     </div>
 
-    <button class="btn btn-primary finish-config-button" v-if="inConfig" @click.prevent="saveConfig">Finish</button>
+    <button class="btn btn-primary finish-config-button" v-if="inConfig" @click.prevent="saveConfig">{{ $t('finish') }}</button>
 
     <div v-show="inConfig" class="config-ui-container">
       <div id="wallpaper" :style="wallpaperStyle"></div>
@@ -17,7 +17,7 @@
           </a>
         </nav>
         <div class="d-flex flex-justify-end">
-          <button class="btn btn-primary" @click="prepareAddCollection">Add</button>
+          <button class="btn btn-primary" @click="prepareAddCollection">{{ $t('add') }}</button>
         </div>
       </div>
       <div class="gallery-container" @wheel="scrollBarWheel" ref="galleryContainer">
@@ -29,19 +29,19 @@
     </div>
 
     <div v-show="isAddingCollection" class="dialog-container" >
-      <details-dialog
+      <div
         class="Box Box--overlay d-flex flex-column"
         id="add_collection"
       >
       <form ref="collectionForm" @change="validateCollectionForm">
         <div class="Box-header">
-          <h3 class="Box-title">Add new collection</h3>
+          <h3 class="Box-title">{{ $t('addNewCollection') }}</h3>
         </div>
         <div class="overflow-auto">
           <div class="Box-body overflow-auto">
             <dl class="form-group">
               <dt>
-                <label for="collectionFormName">Collection name</label>
+                <label for="collectionFormName">{{ $t('collectionName') }}</label>
               </dt>
               <dd>
                 <input class="form-control" v-model="collectionFormName">
@@ -50,11 +50,11 @@
 
             <dl class="form-group">
               <dt>
-                <label for="collection-images">Add images</label>
+                <label for="collection-images">{{ $t('addImages') }}</label>
               </dt>
               <p>
                 <dt>
-                  You can select a folder:
+                  {{ $t('selectFolder') }}
                 </dt>
                 <input
                   class="form-control"
@@ -68,7 +68,7 @@
                   <div v-show="isCollectionFormUploading" class="py-2 bg-green collection-upload-progressbar" :style="collectionProgressbarStyle"></div>
                 </dt>
                 <dt>
-                  or paste image urls below:
+                  {{ $t('pasteUrls') }}
                 </dt>
               <p>
               <dd>
@@ -78,11 +78,11 @@
           </div>
         </div>
         <div class="Box-footer">
-          <button type="button" class="btn" @click="cancelCollectionForm">Cancel</button>
+          <button type="button" class="btn" @click="cancelCollectionForm">{{ $t('cancel') }}</button>
           <button type="button" class="btn btn-primary float-right" @click="submitCollectionForm" :disabled="!isCollectionFormReady">{{ collectionFormSubmitText }}</button>
         </div>
       </form>
-      </details-dialog>
+      </div>
     </div>
 
   </div>
@@ -117,8 +117,8 @@ export default class App extends Vue {
   isAddingCollection = false
   config : IConfiguration
 
-  collectionFormImageUrls
-  collectionFormName
+  collectionFormImageUrls = []
+  collectionFormName = ''
   collectionFormFiles: FileList
   collectionUploadProgress = 0
   collectionUploadImageUrls: string[] = []
@@ -321,9 +321,9 @@ export default class App extends Vue {
 
   get collectionFormSubmitText () {
     if (this.isCollectionFormUploading) {
-      return 'Uploading'
+      return this.$t('uploading')
     } else {
-      return 'Create'
+      return this.$t('create')
     }
   }
 
