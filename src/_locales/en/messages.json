@@ -1,0 +1,45 @@
+{
+  "submit": {
+    "message": "Submit"
+  },
+
+  "finish": {
+    "message": "Finish"
+  },
+
+  "add": {
+    "message": "Add"
+  },
+
+  "cancel": {
+    "message": "Cancel"
+  },
+
+  "uploading": {
+    "message": "Uploading"
+  },
+
+  "create": {
+    "message": "Create"
+  },
+
+  "addNewCollection": {
+    "message": "Add new collection"
+  },
+
+  "collectionName": {
+    "message": "Collection name"
+  },
+
+  "addImages": {
+    "message": "Add images"
+  },
+
+  "selectFolder": {
+    "message": "You can select a folder:"
+  },
+
+  "pasteUrls": {
+    "message": "or paste image urls below:"
+  }
+}
