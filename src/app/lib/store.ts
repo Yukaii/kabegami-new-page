@@ -132,6 +132,10 @@ type DefaultCollection = { name: string, images: string[] }
 const defaultCollections: DefaultCollection[] = [{
     name: 'カナヘイ',
     images: kanaheiWallpapers.wallpapers.map(w => w.images[w.images.length - 1])
+  },
+  {
+    name: 'Snoopy',
+    images: require('../../defaultSets/snoopy.json')
   }
 ]
 
