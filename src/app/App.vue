@@ -13,7 +13,7 @@
         <nav class="menu">
           <a class="menu-item" :class="{selected: isMenuActive(collection)}" :key="collection.id" v-for="collection of collections" @click.prevent="selectCollection(collection)">
             {{ collection.name }}
-            <img src="block.png" v-if="!collection.protected" class="delete-collection-icon" @click="deleteCollection(collection)" alt="">
+            <img src="block.png" v-if="canDeleteCollection(collection)" class="delete-collection-icon" @click="deleteCollection(collection)" alt="">
           </a>
         </nav>
         <div class="d-flex flex-justify-end">
@@ -169,8 +169,8 @@ export default class App extends Vue {
     this.inConfig = true
   }
 
-  saveConfig () {
-    Configuration.set('selectedCollectionId', this.selectedCollectionId)
+  async saveConfig () {
+    await Configuration.set('selectedCollectionId', this.selectedCollectionId)
 
     this.inConfig = false
   }
@@ -330,6 +330,10 @@ export default class App extends Vue {
     return !this.isCollectionFormUploading &&
            !this.isSubmittingCollectionForm &&
            this.isCollectionFormValid;
+  }
+
+  canDeleteCollection (collection) {
+    return !collection.protected && collection.id !== this.selectedCollectionId
   }
 
   validateCollectionForm () {
