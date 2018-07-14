@@ -1,7 +1,7 @@
 {
-  "name": "Kanahei's New Page",
-  "description": "Random kanahei's wallpaper on new page",
-  "version": "0.1.3",
+  "name": "Kabegami New Page",
+  "description": "Random wallpaper on new page",
+  "version": "0.2.0",
   "incognito": "split",
   "chrome_url_overrides": {"newtab": "index.html"},
   "manifest_version": 2,
