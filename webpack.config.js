@@ -47,7 +47,7 @@ let webpackConfig = {
     }, {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          devMode ? { loader: 'style-loader', options: { insertAt: 'top' } } : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
