@@ -1,17 +1,8 @@
-const wallpapersStore = require('./wallpapers.json')
 import { CollectionStore, ImageStore, Configuration, IConfiguration } from './app/lib/store'
 import 'primer/index.scss';
+import { firstLoadRandomWallpaper } from './defaultSets';
 
 let config : IConfiguration
-
-function firstLoadRandomWallpaper (): string {
-  const wallpapers = wallpapersStore.wallpapers
-  const wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
-
-  const image = wallpaper.images[0]
-
-  return image
-}
 
 async function getImageFromCollection (): Promise<string> {
   const collections = await CollectionStore.all();

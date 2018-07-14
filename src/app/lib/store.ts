@@ -1,8 +1,7 @@
 import { uuid } from './utils';
 import * as localforge from 'localforage'
 import { mapSeries, forEachSeries } from 'p-iteration';
-
-const kanaheiWallpapers = require('../../wallpapers.json')
+import { defaultCollections } from '../../defaultSets';
 
 interface IModel extends Object {
   id?: string;
@@ -126,18 +125,6 @@ export class Configuration {
     return await this.getAll()[key];
   }
 }
-
-type DefaultCollection = { name: string, images: string[] }
-
-const defaultCollections: DefaultCollection[] = [{
-    name: 'カナヘイ',
-    images: kanaheiWallpapers.wallpapers.map(w => w.images[w.images.length - 1])
-  },
-  {
-    name: 'Snoopy',
-    images: require('../../defaultSets/snoopy.json')
-  }
-]
 
 /**
  * Store default collections
