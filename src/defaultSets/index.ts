@@ -9,6 +9,10 @@ export const defaultCollections: DefaultCollection[] = [{
   {
     name: 'Snoopy',
     images: require('./snoopy.json')
+  },
+  {
+    name: 'Doraemon',
+    images: require('./doraemon.json')
   }
 ]
 
