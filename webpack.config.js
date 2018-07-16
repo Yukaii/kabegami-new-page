@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const devMode = !(process.env.NODE_ENV === 'production');
 
@@ -70,10 +71,13 @@ let webpackConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  delete webpackConfig.devtool
+
   webpackConfig.plugins = webpackConfig.plugins.concat([
     new CleanWebpackPlugin([
       path.join(__dirname, 'extension_dist')
-    ])
+    ]),
+    new OptimizeCSSAssetsPlugin()
   ])
 }
 
