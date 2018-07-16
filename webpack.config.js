@@ -17,9 +17,9 @@ let webpackConfig = {
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CopyWebpackPlugin([{
-      from: '*',
+      from: '**/*',
       context: 'src',
-      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js']
+      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js', '*.example', 'defaultSets/*.json', '@types']
     }]),
     new MiniCssExtractPlugin({
       filename: '[name].css'
