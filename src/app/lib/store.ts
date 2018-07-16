@@ -5,7 +5,6 @@ import { defaultCollections } from '../../defaultSets';
 
 interface IModel extends Object {
   id?: string;
-  protected?: boolean;
   createdAt?: number;
   updatedAt?: number;
 }
@@ -16,6 +15,7 @@ export interface IImage extends IModel {
 
 export interface ICollection extends IModel {
   name: string;
+  protected?: boolean;
   imageIds: Array<string>;
 }
 
