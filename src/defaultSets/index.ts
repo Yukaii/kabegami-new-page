@@ -13,6 +13,10 @@ export const defaultCollections: DefaultCollection[] = [{
   {
     name: 'Doraemon',
     images: require('./doraemon.json')
+  },
+  {
+    name: 'ちびまる子ちゃん',
+    images: require('./chibimaruko.json')
   }
 ]
 
