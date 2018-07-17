@@ -92,7 +92,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component';
 import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections, Configuration, IConfiguration } from './lib/store'
-import { map } from 'p-iteration'
+import { mapSeries } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
 
 const ConfigIcon = require('../config.svg');
@@ -116,7 +116,7 @@ export default class App extends Vue {
   isAddingCollection = false
   config : IConfiguration
 
-  collectionFormImageUrls = []
+  collectionFormImageUrls = ''
   collectionFormName = ''
   collectionFormFiles: FileList
   collectionUploadProgress = 0
@@ -218,7 +218,7 @@ export default class App extends Vue {
     ImageUploader.cancel();
     this.isCollectionFormUploading = false
 
-    this.collectionFormImageUrls = undefined
+    this.collectionFormImageUrls = ''
     this.collectionFormName = undefined
 
     this.isAddingCollection = false
@@ -227,11 +227,9 @@ export default class App extends Vue {
   async submitCollectionForm () {
     this.isSubmittingCollectionForm = true
 
-    const imageIds = await this.saveUrlsToToImageStore(
-      !!this.collectionUploadImageUrls ?
-        this.collectionUploadImageUrls :
-        this.collectionFormImageUrls
-    );
+    const imageIds = this.collectionUploadImageUrls.length !== 0 ?
+        await this.saveUrlsToToImageStore(this.collectionUploadImageUrls) :
+        await this.processRawImageUrls(this.collectionFormImageUrls);
 
     await CollectionStore.create({
       name: this.collectionFormName,
@@ -246,11 +244,11 @@ export default class App extends Vue {
   }
 
   async processRawImageUrls (imageUrls: string) {
-    return await this.saveUrlsToToImageStore(imageUrls.match(/https?:\/\/[^\s]+\.(png|gif|jpg|jpeg)/g))
+    return await this.saveUrlsToToImageStore(imageUrls.match(/https?:\/\/[^\s]+?\.(png|gif|jpg|jpeg)/g))
   }
 
   async saveUrlsToToImageStore (urls: string[]) {
-    return await map(urls, async url => {
+    return await mapSeries(urls, async url => {
       const image = await ImageStore.create({
         path: url
       })
