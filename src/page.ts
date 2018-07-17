@@ -9,11 +9,14 @@ async function getImageFromCollection (): Promise<string> {
   const selectedCollection = collections.find(c => c.id === config.selectedCollectionId);
   const imageStore = await ImageStore.getStore();
 
-  const randomImageId = selectedCollection.imageIds[Math.floor(Math.random() * selectedCollection.imageIds.length)]
+  if (typeof selectedCollection === 'undefined') {
+    return firstLoadRandomWallpaper();
+  } else {
+    const randomImageId = selectedCollection.imageIds[Math.floor(Math.random() * selectedCollection.imageIds.length)]
 
-  return imageStore[randomImageId].path
+    return imageStore[randomImageId].path
+  }
 }
-
 
 window.onload = async function () {
   config = await Configuration.getAll();
