@@ -101,6 +101,7 @@ export const ImageStore = Store.factory<IImage>('images');
 
 export interface IConfiguration {
   selectedCollectionId: string;
+  configIconName: string
 }
 
 export class Configuration {

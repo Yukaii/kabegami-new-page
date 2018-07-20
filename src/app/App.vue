@@ -1,8 +1,16 @@
 <template>
   <div class="app-container clearfix">
 
-    <div class="config-icon" v-show="!inConfig" @click.prevent="showConfig">
-      <config-icon></config-icon>
+    <div class="config-icon" v-show="!inConfig && showConfigIcon" @click.prevent="showConfig" ref="configIcon">
+      <config-icon :iconName="configIconName"></config-icon>
+      <context-menu class="right-menu"
+        :target="contextMenuTarget"
+        :show="contextMenuVisible"
+        @update:show="(show) => contextMenuVisible = show">
+        <a v-for="icon in availableIcons" :key="icon" @click.stop.prevent="changeConfigIcon(icon)">
+          <config-icon :iconName="icon"></config-icon>
+        </a>
+      </context-menu>
     </div>
 
     <button class="btn btn-primary finish-config-button" v-if="inConfig" @click.prevent="saveConfig">{{ $t('finish') }}</button>
@@ -94,8 +102,9 @@ import Component from 'vue-class-component';
 import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefaultCollections, Configuration, IConfiguration } from './lib/store'
 import { mapSeries } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
+import ConfigIcon, { availableIcons as icons, availableIcons } from './components/ConfigIcon.vue'
 
-const ConfigIcon = require('../config.svg');
+import { component as ContextMenu } from '@xunlei/vue-context-menu'
 
 const textareaExample = [
   'https://i.imgur.com/7Fu38N.png',
@@ -105,7 +114,8 @@ const textareaExample = [
 
 @Component({
   components: {
-    ConfigIcon
+    ConfigIcon,
+    ContextMenu
   }
 })
 export default class App extends Vue {
@@ -124,6 +134,12 @@ export default class App extends Vue {
   isCollectionFormUploading = false
   isCollectionFormValid = false
   isSubmittingCollectionForm = false
+
+  contextMenuTarget = null
+  contextMenuVisible = false
+  availableIcons = icons
+  configIconName = 'usagi'
+  showConfigIcon = false
 
   collections: ICollection[] = []
   imageStore: { [key: string]: IImage }
@@ -264,8 +280,12 @@ export default class App extends Vue {
   }
 
   async mounted () {
+    this.contextMenuTarget = this.$refs.configIcon
+
     await installDefaultCollections();
     await this.reloadStore();
+
+    this.showConfigIcon = true
   }
 
   async reloadStore () {
@@ -275,6 +295,7 @@ export default class App extends Vue {
     this.config = await Configuration.getAll();
 
     this.selectedCollectionId = this.config.selectedCollectionId;
+    this.configIconName = this.config.configIconName
   }
 
   get selectedCollection () {
@@ -337,6 +358,12 @@ export default class App extends Vue {
   validateCollectionForm () {
     this.isCollectionFormValid = (typeof this.collectionFormName !== 'undefined') &&
         (!!this.collectionFormImageUrls || !!this.collectionUploadImageUrls) // any field is ok
+  }
+
+  async changeConfigIcon (iconName) {
+    this.configIconName = iconName
+    await Configuration.set('configIconName', iconName)
+    this.contextMenuVisible = false
   }
 }
 </script>
@@ -476,6 +503,33 @@ textarea[name="collectionFormImageUrls"] {
   transition: width ease-in-out .3s;
   margin-top: 10px;
   margin-right: 6px;
+}
+
+.right-menu {
+  position: fixed;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 999;
+  display: none;
+  transform: translateX(-100%) translateY(-100%);
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
+  border-radius: 1px;
+
+  a {
+    width: 75px;
+    height: 73px;
+    line-height: 73px;
+    text-align: center;
+    display: block;
+    color: #1a1a1a;
+    padding: 2px;
+
+    &:hover {
+      background: #eee;
+      color: #fff;
+      background: #ff8383;
+    }
+  }
 }
 
 </style>
