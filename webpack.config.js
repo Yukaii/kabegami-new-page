@@ -7,6 +7,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
+require('dotenv').config()
+
 const devMode = !(process.env.NODE_ENV === 'production');
 
 let webpackConfig = {
@@ -20,12 +22,13 @@ let webpackConfig = {
     new CopyWebpackPlugin([{
       from: '**/*',
       context: 'src',
-      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js', '*.example', 'defaultSets/*.json', '@types']
+      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js', '*.example', 'defaultSets/*.json', '@types', '*.svg']
     }]),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new webpack.EnvironmentPlugin(['IMGUR_CLIENT_IDS'])
   ],
   output: {
     path: path.join(__dirname, 'extension_dist'),

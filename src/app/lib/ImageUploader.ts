@@ -2,9 +2,9 @@ import axios, { Canceler } from 'axios';
 import EventEmitter from 'events';
 import { map } from 'p-iteration'
 
-import config from '../config'
-
 const CancelToken = axios.CancelToken
+
+const imgurClientIds = (process.env.IMGUR_CLIENT_IDS || '').split(',')
 
 // https://neighborhood999.github.io/2018/04/17/use-blob-and-file-web-api-create-upload-image-preview-immediately/
 function getFileBase64Encode(blob: File): Promise<string> {
@@ -52,7 +52,7 @@ export default class ImageUploader {
 
     const id = this.getFileIdentifer(file);
 
-    const clientId = config.imgurClientIds[Math.floor(Math.random() * config.imgurClientIds.length)]
+    const clientId = imgurClientIds[Math.floor(Math.random() * imgurClientIds.length)]
 
     const response = await axios.post('https://api.imgur.com/3/image', {
       image: base64Part,
