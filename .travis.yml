@@ -5,6 +5,7 @@ env:
   - EXTENSION_ID=fbbdincgjgdmbbkongmineooghpadbgk
 deploy:
   provider: script
+  skip_cleanup: true
   script: npm run ext:release
   on:
     tags: true
