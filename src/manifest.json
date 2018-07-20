@@ -1,7 +1,7 @@
 {
   "name": "Kabegami New Page",
   "description": "Random wallpaper on new page",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "incognito": "split",
   "chrome_url_overrides": {"newtab": "index.html"},
   "manifest_version": 2,

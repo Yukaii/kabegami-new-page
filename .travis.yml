@@ -5,9 +5,6 @@ env:
   - EXTENSION_ID=fbbdincgjgdmbbkongmineooghpadbgk
 deploy:
   provider: script
-  script:
-    - npm run ext:build
-    - npm run ext:release
+  script: npm run ext:release
   on:
-    branch: master
     tags: true

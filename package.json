@@ -14,7 +14,7 @@
     "ext:build": "cross-env NODE_ENV=production webpack",
     "ext:archive": "node ./bin/archive",
     "ext:prepare": "npm run ext:build && npm run ext:archive",
-    "ext:release": "webstore upload --source=extension_dist --auto-publish",
+    "ext:release": "npm run ext:build && cd extension_dist && webstore upload --auto-publish",
     "prepublish": "npm run build"
   },
   "repository": {
