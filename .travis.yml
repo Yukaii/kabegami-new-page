@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '10'
+env:
+  - EXTENSION_ID=fbbdincgjgdmbbkongmineooghpadbgk
+deploy:
+  provider: script
+  script:
+    - npm run ext:build
+    - npm run ext:release
+  on:
+    branch: master
+    tags: true
