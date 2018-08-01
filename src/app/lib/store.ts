@@ -46,7 +46,7 @@ export class Store<T extends IModel> {
     return dataIds.map(id => dataStorage[id]);
   }
 
-  async exists (data: T) {
+  async exists (data: Partial<T>) {
     const dataStorage = await this.getStorage();
     const dataIds = Object.keys(dataStorage);
 
@@ -71,6 +71,32 @@ export class Store<T extends IModel> {
     });
 
     return storageToAdd;
+  }
+
+  async find (filter: T): Promise<T> {
+    const entries = await this.all();
+
+    return entries.find(ent => {
+      return Object.entries(filter).reduce((acc, [k, v]) => {
+        return acc && ent[k] === v
+      }, true)
+    })
+  }
+
+  async update (data: Partial<T>): Promise<T | boolean> {
+    const dataStorage = await this.getStorage();
+    if (!this.exists(data)) {
+      return false;
+    }
+
+    // casting data.id to string
+    const id : string = data.id
+
+    dataStorage[id] = Object.assign({}, dataStorage[id], data)
+
+    await storage.setItem(this.key, dataStorage);
+
+    return dataStorage[id]
   }
 
   async destroy (data: T) {
@@ -147,8 +173,19 @@ export async function installDefaultCollections () {
         imageIds
       });
     } else {
-      // TODO: update new default sets
-      // this can be done after auto enabling auto extension build
+      // Update existing default sets
+      const images = await ImageStore.all();
+      const collection = collections.find(c => c.name === defaultCollection.name)
+      const existingImages = collection.imageIds.map(id => images.find(image => image.id === id)).map(i => i.path)
+      const imagesToAdd = defaultCollection.images.filter(path => !existingImages.includes(path))
+      const imageStores = await mapSeries(imagesToAdd, async path => await ImageStore.create({ path: path }));
+
+      const imageIds = imageStores.map(i => i[Object.keys(i)[0]].id);
+
+      await CollectionStore.update({ id: collection.id, imageIds: [
+        ...imageIds,
+        ...collection.imageIds
+      ] })
     }
   });
 
