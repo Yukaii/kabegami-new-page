@@ -10,5 +10,5 @@ if (!fs.existsSync(path.join(__dirname, '../dist/index.js'))) {
 const { getAll } = require('../dist/index')
 
 getAll().then(wallpapers => {
-  fs.writeFileSync(path.join(__dirname, '../extension/wallpapers.json'), JSON.stringify({ wallpapers }, null, 2))
+  fs.writeFileSync(path.join(__dirname, '../src/defaultSets/kanahei.json'), JSON.stringify({ wallpapers }, null, 2))
 })
