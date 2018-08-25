@@ -1,4 +1,8 @@
 {
+  "extensionName": {
+    "message": "Kabegami New Page"
+  },
+
   "submit": {
     "message": "Submit"
   },
@@ -41,5 +45,21 @@
 
   "pasteUrls": {
     "message": "or paste image urls below:"
+  },
+
+  "notificationInstallTitle": {
+    "message": "Kabegami new page installed"
+  },
+
+  "notificationInstallMessage": {
+    "message": "Click here to try it out"
+  },
+
+  "notificationUpdateTitle": {
+    "message": "Kabegami new page updated"
+  },
+
+  "notificationUpdateMessage": {
+    "message": "Click here to see what's new"
   }
 }

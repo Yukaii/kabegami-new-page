@@ -16,6 +16,7 @@ let webpackConfig = {
   devtool: 'source-map',
   entry: {
     page: './src/page',
+    background: './src/background'
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
