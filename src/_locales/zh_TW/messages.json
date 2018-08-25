@@ -3,6 +3,10 @@
     "message": "分頁壁紙君"
   },
 
+  "extensionDescription": {
+    "message": "在新分頁隨機顯示新的桌布"
+  },
+
   "submit": {
     "message": "送出"
   },

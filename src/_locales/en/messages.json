@@ -3,6 +3,10 @@
     "message": "Kabegami New Page"
   },
 
+  "extensionDescription": {
+    "message": "Random wallpaper on new page"
+  },
+
   "submit": {
     "message": "Submit"
   },
