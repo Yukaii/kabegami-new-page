@@ -1,4 +1,12 @@
 {
+  "extensionName": {
+    "message": "分頁壁紙君"
+  },
+
+  "extensionDescription": {
+    "message": "在新分頁隨機顯示新的桌布"
+  },
+
   "submit": {
     "message": "送出"
   },
@@ -41,5 +49,30 @@
 
   "pasteUrls": {
     "message": "或是貼上圖片網址（一行一個）"
+  },
+
+  "notificationInstallTitle": {
+    "message": "「分頁壁紙君」已安裝"
+  },
+
+  "notificationInstallMessage": {
+    "message": "馬上來體驗看看吧！"
+  },
+
+  "notificationUpdateTitle": {
+    "message": "「分頁壁紙君」已更新"
+  },
+
+  "notificationUpdateMessage": {
+    "message": "看看有什麼新功能"
+  },
+
+  "onlyImagesUpload": {
+    "message": "只有圖片才能上傳哦！請檢查資料夾中的檔案"
+  },
+
+
+  "imageUploadFailed": {
+    "message": "圖片上傳失敗，請檢查你的網路連線並稍後再試試看"
   }
 }

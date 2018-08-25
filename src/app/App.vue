@@ -1,6 +1,8 @@
 <template>
   <div class="app-container clearfix">
 
+    <notification-center></notification-center>
+
     <div class="config-icon" v-show="!inConfig && showConfigIcon" @click.prevent="showConfig" ref="configIcon">
       <config-icon :iconName="configIconName"></config-icon>
       <context-menu class="right-menu"
@@ -103,6 +105,7 @@ import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefault
 import { mapSeries } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
 import ConfigIcon, { availableIcons as icons, availableIcons } from './components/ConfigIcon.vue'
+import NotificationCenter, { notify } from './components/NotificationCenter.vue'
 
 import { component as ContextMenu } from '@xunlei/vue-context-menu'
 
@@ -115,7 +118,8 @@ const textareaExample = [
 @Component({
   components: {
     ConfigIcon,
-    ContextMenu
+    ContextMenu,
+    NotificationCenter
   }
 })
 export default class App extends Vue {
@@ -197,15 +201,20 @@ export default class App extends Vue {
     if (!this.validateInputFiles()) {
       this.resetCollectionFiles();
 
-      // TODO: flash error message
-      console.error('Only images can be uploaded')
+      notify({ type: 'error', message: this.$t('onlyImagesUpload') as string })
     } else {
       this.isCollectionFormUploading = true
 
-      // TODO: handle thrown error
-      this.collectionUploadImageUrls = await ImageUploader.upload(this.collectionFormFiles, (progress) => {
-        this.collectionUploadProgress = progress
-      })
+      try {
+        this.collectionUploadImageUrls = await ImageUploader.upload(this.collectionFormFiles, (progress) => {
+          this.collectionUploadProgress = progress
+        })
+      } catch (error) {
+        const message = this.$t('imageUploadFailed') as string
+        console.error(error)
+        notify({ type: 'error', message })
+      }
+
       this.isCollectionFormUploading = false
     }
   }

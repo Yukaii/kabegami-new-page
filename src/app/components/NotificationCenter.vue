@@ -1,0 +1,91 @@
+<template>
+  <div class="notifications-container">
+    <div class="flash"
+      :class="typeClass"
+      v-for="not in notifications"
+      :type="not.type"
+      :key="not.id"
+    >
+      <button
+        class="flash-close js-flash-close"
+        type="button"
+        @click.prevent="clearNotification(not.id)">x</button>
+      {{ not.message }}
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component';
+
+const events = new Vue()
+
+type NotifyOptions = {
+  type?: 'info' | 'warn' | 'error',
+  message: string,
+  duration?: number,
+}
+export function notify ({ type = 'info', duration = 3000, message } : NotifyOptions) {
+  events.$emit('notify', { type, duration, message })
+}
+
+const AppProps = Vue.extend({
+  props: {
+    type: String
+  }
+})
+
+@Component
+export default class NotificationCenter extends AppProps {
+  notificationMap: { [key: string]: Object } = {}
+
+  mounted () {
+    events.$on('notify', this.createNotification)
+  }
+
+  createNotification ({type, message, duration} : NotifyOptions) {
+    const notification = {
+      id: window.performance.now(),
+      type,
+      message
+    }
+
+    this.notificationMap = { ...this.notificationMap, [notification.id]: notification }
+    window.setTimeout(() => this.clearNotification(notification.id), duration)
+  }
+
+  clearNotification (notificationId) {
+    const notificationMap = {...this.notificationMap}
+    delete notificationMap[notificationId]
+    this.notificationMap = notificationMap
+  }
+
+  get typeClass () {
+    return `flash-${this.type}`
+  }
+
+  get notifications () {
+    return Object.values(this.notificationMap);
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.flash {
+  margin: 0 0 15px;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.notifications-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  max-width: 435px;
+  min-width: 350px;
+  padding-top: 1em;
+  padding-right: 1em;
+}
+</style>
