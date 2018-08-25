@@ -1,6 +1,8 @@
 <template>
   <div class="app-container clearfix">
 
+    <notification-center></notification-center>
+
     <div class="config-icon" v-show="!inConfig && showConfigIcon" @click.prevent="showConfig" ref="configIcon">
       <config-icon :iconName="configIconName"></config-icon>
       <context-menu class="right-menu"
@@ -103,6 +105,7 @@ import { Store, ICollection, IImage, CollectionStore, ImageStore, installDefault
 import { mapSeries } from 'p-iteration'
 import ImageUploader from './lib/ImageUploader';
 import ConfigIcon, { availableIcons as icons, availableIcons } from './components/ConfigIcon.vue'
+import NotificationCenter, { notify } from './components/NotificationCenter.vue'
 
 import { component as ContextMenu } from '@xunlei/vue-context-menu'
 
@@ -115,7 +118,8 @@ const textareaExample = [
 @Component({
   components: {
     ConfigIcon,
-    ContextMenu
+    ContextMenu,
+    NotificationCenter
   }
 })
 export default class App extends Vue {
