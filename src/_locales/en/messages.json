@@ -65,5 +65,13 @@
 
   "notificationUpdateMessage": {
     "message": "Click here to see what's new"
+  },
+
+  "onlyImagesUpload": {
+    "message": "Only images can be uploaded. Please check the files in the folder"
+  },
+
+  "imageUploadFailed": {
+    "message": "Image upload failed. Please try it later or check your internet connection"
   }
 }

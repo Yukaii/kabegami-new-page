@@ -65,5 +65,14 @@
 
   "notificationUpdateMessage": {
     "message": "看看有什麼新功能"
+  },
+
+  "onlyImagesUpload": {
+    "message": "只有圖片才能上傳哦！請檢查資料夾中的檔案"
+  },
+
+
+  "imageUploadFailed": {
+    "message": "圖片上傳失敗，請檢查你的網路連線並稍後再試試看"
   }
 }

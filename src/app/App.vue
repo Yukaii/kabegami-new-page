@@ -201,15 +201,20 @@ export default class App extends Vue {
     if (!this.validateInputFiles()) {
       this.resetCollectionFiles();
 
-      // TODO: flash error message
-      console.error('Only images can be uploaded')
+      notify({ type: 'error', message: this.$t('onlyImagesUpload') as string })
     } else {
       this.isCollectionFormUploading = true
 
-      // TODO: handle thrown error
-      this.collectionUploadImageUrls = await ImageUploader.upload(this.collectionFormFiles, (progress) => {
-        this.collectionUploadProgress = progress
-      })
+      try {
+        this.collectionUploadImageUrls = await ImageUploader.upload(this.collectionFormFiles, (progress) => {
+          this.collectionUploadProgress = progress
+        })
+      } catch (error) {
+        const message = this.$t('imageUploadFailed') as string
+        console.error(error)
+        notify({ type: 'error', message })
+      }
+
       this.isCollectionFormUploading = false
     }
   }
