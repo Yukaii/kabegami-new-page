@@ -1,9 +1,8 @@
 <template>
   <div class="notifications-container">
     <div class="flash"
-      :class="typeClass"
+      :class="typeClass(not.type)"
       v-for="not in notifications"
-      :type="not.type"
       :key="not.id"
     >
       <button
@@ -26,7 +25,7 @@ type NotifyOptions = {
   message: string,
   duration?: number,
 }
-export function notify ({ type = 'info', duration = 3000, message } : NotifyOptions) {
+export function notify ({ type = 'info', duration = 10000, message } : NotifyOptions) {
   events.$emit('notify', { type, duration, message })
 }
 
@@ -61,8 +60,8 @@ export default class NotificationCenter extends AppProps {
     this.notificationMap = notificationMap
   }
 
-  get typeClass () {
-    return `flash-${this.type}`
+  typeClass (type) {
+    return `flash-${type}`
   }
 
   get notifications () {
@@ -79,6 +78,7 @@ export default class NotificationCenter extends AppProps {
 }
 
 .notifications-container {
+  z-index: 1000;
   position: absolute;
   top: 0;
   right: 0;
