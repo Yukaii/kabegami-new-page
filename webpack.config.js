@@ -6,6 +6,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const glob = require('glob-all')
 
 require('dotenv').config()
 
@@ -27,6 +29,13 @@ let webpackConfig = {
     }]),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new PurgecssPlugin({
+      paths: glob.sync([
+        path.join(__dirname, './src/index.html'),
+        path.join(__dirname, './src/**/*.vue'),
+        path.join(__dirname, './src/**/*.ts')
+      ])
     }),
     new VueLoaderPlugin(),
     new webpack.EnvironmentPlugin(['IMGUR_CLIENT_IDS'])
