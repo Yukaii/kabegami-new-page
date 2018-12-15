@@ -4,7 +4,6 @@ import cheerio = require('cheerio')
 const kabegami = 'http://www.kanahei.com/kabegami/'
 
 interface IWallpaper {
-  title: string
   images: string[]
 }
 
@@ -37,12 +36,11 @@ async function fetchPage (url = kabegami) {
 }
 
 function parseWallpapers ($: CheerioStatic): IWallpaper[] {
-  return $('.article-kabegami').toArray().map(elem => {
+  return $('.col-xs-6.col-sm-4.col-md-3').toArray().map(elem => {
     const wallpaper = $(elem)
-    const title = wallpaper.find('h2').text()
     const images = wallpaper.find('a').toArray().map(elem => $(elem).attr('href'))
 
-    return { title, images }
+    return { images }
   })
 }
 
