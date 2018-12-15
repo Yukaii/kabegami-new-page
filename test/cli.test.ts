@@ -11,6 +11,15 @@ describe('Test real crawler', function () {
 
     const image = images[0]
     assert.isObject(image)
-    assert.hasAllKeys(image, ['images', 'title'])
+    assert.hasAllKeys(image, ['images'])
+
+    assert.isArray(image.images)
+    assert.isString(image.images[0])
+  })
+
+  it('test #getOne', async function () {
+    const image = await getOne()
+    assert.isArray(image.images)
+    assert.isString(image.images[0])
   })
 })
