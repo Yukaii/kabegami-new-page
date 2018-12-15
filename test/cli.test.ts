@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { getAll, getOne } from '../cli'
+import { getAll, getOne } from '../src/cli'
 
 describe('Test real crawler', function () {
   this.timeout(5000)

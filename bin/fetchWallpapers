@@ -3,12 +3,16 @@
 const path = require('path')
 const fs = require('fs')
 
-if (!fs.existsSync(path.join(__dirname, '../dist/index.js'))) {
+const modulesPath = '../dist/cli/index.js'
+
+if (!fs.existsSync(path.join(__dirname, modulesPath))) {
   throw new TypeError('Please run `npm run build` first.')
 }
 
-const { getAll } = require('../dist/index')
+const { getAll } = require(modulesPath)
 
-getAll().then(wallpapers => {
-  fs.writeFileSync(path.join(__dirname, '../src/defaultSets/kanahei.json'), JSON.stringify({ wallpapers }, null, 2))
-})
+;(async () => {
+  const wallpapers = await getAll()
+  fs.writeFileSync(path.join(__dirname, '../src/defaultSets/kanahei.json'), JSON.stringify(wallpapers))
+})();
+
