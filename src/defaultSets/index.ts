@@ -4,7 +4,7 @@ type DefaultCollection = { name: string, images: string[] }
 
 export const defaultCollections: DefaultCollection[] = [{
     name: 'カナヘイ',
-    images: kanaheiWallpapers.wallpapers.map(w => w.images[w.images.length - 1])
+    images: kanaheiWallpapers.map(w => w.images[w.images.length - 1])
   },
   {
     name: 'Snoopy',
@@ -21,8 +21,7 @@ export const defaultCollections: DefaultCollection[] = [{
 ]
 
 export function firstLoadRandomWallpaper (): string {
-  const wallpapers = kanaheiWallpapers.wallpapers
-  const wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+  const wallpaper = kanaheiWallpapers[Math.floor(Math.random() * kanaheiWallpapers.length)];
 
   // load lowest resolution for the first time
   const image = wallpaper.images[0]
