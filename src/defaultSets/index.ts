@@ -17,6 +17,10 @@ export const defaultCollections: DefaultCollection[] = [{
   {
     name: 'ちびまる子ちゃん',
     images: require('./chibimaruko.json')
+  },
+  {
+    name: 'Elmo',
+    images: require('./elmo.json')
   }
 ]
 
