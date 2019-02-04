@@ -38,7 +38,7 @@ let webpackConfig = {
       ])
     }),
     new VueLoaderPlugin(),
-    new webpack.EnvironmentPlugin(['IMGUR_CLIENT_IDS'])
+    new webpack.EnvironmentPlugin(['IMGUR_CLIENT_IDS', 'RELEASE_NOTE_URL'])
   ],
   output: {
     path: path.join(__dirname, 'extension_dist'),

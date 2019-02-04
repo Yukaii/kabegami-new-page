@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "browser": "dist/index.js",
   "scripts": {
+    "fetchWallpaper": "node ./bin/fetchWallpapers",
     "watch": "tsc -w",
     "build": "tsc",
     "ext:watch": "webpack --watch",
