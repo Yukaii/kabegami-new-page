@@ -6,8 +6,12 @@ const CancelToken = axios.CancelToken
 
 const imgurClientIds = (process.env.IMGUR_CLIENT_IDS || '').split(',')
 
+interface IFile extends File {
+  webkitRelativePath: any
+}
+
 // https://neighborhood999.github.io/2018/04/17/use-blob-and-file-web-api-create-upload-image-preview-immediately/
-function getFileBase64Encode(blob: File): Promise<string> {
+function getFileBase64Encode(blob: File): Promise<string | ArrayBuffer> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
@@ -30,7 +34,7 @@ export default class ImageUploader {
 
     this.emitter.on('progressUpdated', callback);
 
-    const images = await map(Array.from(files), async file => {
+    const images = await map(Array.from(files), async (file: IFile) => {
       const id = this.getFileIdentifer(file)
       const existingImage = this.uploadedRecord.get(id)
       if (typeof this.progressMap.get(id) === 'undefined' && typeof existingImage === 'undefined') {
@@ -45,8 +49,8 @@ export default class ImageUploader {
     return images;
   }
 
-  private static async uploadImage (file: File) {
-    const base64Image = await getFileBase64Encode(file)
+  private static async uploadImage (file: IFile) {
+    const base64Image = (await getFileBase64Encode(file)) as string
     const base64Part = base64Image.split('base64,')[1]
     const base64Ext = base64Image.match(/\/(.+);base64/)[1]
 
@@ -81,7 +85,7 @@ export default class ImageUploader {
     return link;
   }
 
-  static getFileIdentifer (file: File) {
+  static getFileIdentifer (file: IFile) {
     const { name, webkitRelativePath, lastModified } = file;
     return `${name}/${webkitRelativePath}/${lastModified}`
   }
