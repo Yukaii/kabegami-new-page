@@ -24,7 +24,7 @@ browser.runtime.onInstalled.addListener(function (details) {
   browser.notifications.onClicked.addListener(function (notiId) {
     if (notiId === notificationId) {
       browser.tabs.create({
-        url: browser.extension.getURL('index.html')
+        url: process.env.RELEASE_NOTE_URL || browser.extension.getURL('index.html')
       })
     }
     browser.notifications.clear(notiId)
