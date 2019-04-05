@@ -1,4 +1,6 @@
-# 卡娜赫拉的新分頁 - Chrome 擴充功能
+# 分頁壁紙君 - Chrome 擴充功能
+
+更換你的新分頁桌布！
 
 [![Chrome Web Store](https://badgen.net/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
 [![Chrome Web Store](https://badgen.net/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
