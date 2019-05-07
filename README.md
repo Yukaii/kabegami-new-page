@@ -2,6 +2,7 @@
 
 更換你的新分頁桌布！
 
+[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page)
 [![Chrome Web Store](https://badgen.net/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
 [![Chrome Web Store](https://badgen.net/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
 [![Chrome Web Store](https://badgen.net/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
