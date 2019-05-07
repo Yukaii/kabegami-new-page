@@ -10,6 +10,10 @@
 
 [![Kanahei's New Page](https://cdn.rawgit.com/Yukaii/kanahei-wallpapers/127b5c1b/docs/images/demo.gif)](https://www.youtube.com/watch?v=06aZmi58VCc "Kanahei's New Page")
 
+## Changelog
+
+[Changelog 看這裡](https://hackmd.io/s/BkrJibGXN)
+
 ## NPM Pakcage
 
 [![npm](https://img.shields.io/npm/v/kanahei-wallpapers.svg)](https://www.npmjs.com/package/kanahei-wallpapers)
