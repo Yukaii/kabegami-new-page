@@ -1,6 +1,6 @@
 {
   "name": "kanahei-wallpapers",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "A utility to download all kanahei wallpapers",
   "bin": {
     "kanahei": "dist/cli.js"
