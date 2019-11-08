@@ -13,7 +13,7 @@
 
 ## Changelog
 
-[Changelog 看這裡](https://hackmd.io/s/BkrJibGXN)
+[Changelog 看這裡](https://hackmd.io/@yukai/kabegami-new-page)
 
 ## NPM Pakcage
 
