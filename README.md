@@ -1,13 +1,14 @@
 # 分頁壁紙君 - Chrome 擴充功能
 
-更換你的新分頁桌布！
+![marquee](./docs/images/Marquee.png)
 
-[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page)
-[![Chrome Web Store](https://badgen.net/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
-[![Chrome Web Store](https://badgen.net/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
-[![Chrome Web Store](https://badgen.net/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
+在新分頁隨機顯示桌布！
+
+[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page) [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
 
 [chrome-web-store]: https://chrome.google.com/webstore/detail/kanaheis-new-page/fbbdincgjgdmbbkongmineooghpadbgk
+
+## Screenshots
 
 [![Kanahei's New Page](https://cdn.rawgit.com/Yukaii/kanahei-wallpapers/127b5c1b/docs/images/demo.gif)](https://www.youtube.com/watch?v=06aZmi58VCc "Kanahei's New Page")
 
