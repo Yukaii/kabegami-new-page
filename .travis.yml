@@ -3,9 +3,10 @@ node_js:
   - '10'
 env:
   - EXTENSION_ID=fbbdincgjgdmbbkongmineooghpadbgk
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: npm run ext:release
-  on:
-    tags: true
+# deploy:
+#   provider: script
+#   skip_cleanup: true
+#   script: npm run ext:release
+#   on:
+#     tags: true
+#
