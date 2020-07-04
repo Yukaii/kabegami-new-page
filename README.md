@@ -4,7 +4,7 @@
 
 在新分頁隨機顯示桌布！
 
-[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page) [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store]
+[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page) [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![time tracker](https://wakatime.com/badge/github/Yukaii/kabegami-new-page.svg)](https://wakatime.com/badge/github/Yukaii/kabegami-new-page)
 
 [chrome-web-store]: https://chrome.google.com/webstore/detail/kanaheis-new-page/fbbdincgjgdmbbkongmineooghpadbgk
 
