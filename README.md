@@ -12,6 +12,12 @@
 
 [![Kanahei's New Page](https://cdn.rawgit.com/Yukaii/kanahei-wallpapers/127b5c1b/docs/images/demo.gif)](https://www.youtube.com/watch?v=06aZmi58VCc "Kanahei's New Page")
 
+![Screenshots-1](./docs/screenshots/Screenshots-1.png)
+
+![Screenshots-2](./docs/screenshots/Screenshots-2.png)
+
+![Screenshots-3](./docs/screenshots/Screenshots-3.png)
+
 ## Changelog
 
 [Changelog 看這裡](https://hackmd.io/@yukai/kabegami-new-page)
