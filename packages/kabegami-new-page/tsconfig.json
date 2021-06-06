@@ -12,17 +12,13 @@
     ],
     "types": [
       "node",
-      "jest"
+      "jest",
+      "firefox-webext-browser"
     ],
     "typeRoots": [
       "node_modules/@types",
-      "node_modules/web-ext-types",
       "src/@types"
     ],
     "outDir": "dist"
-  },
-  "include": [
-    "src",
-    "__tests__"
-  ]
+  }
 }
