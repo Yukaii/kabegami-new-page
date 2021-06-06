@@ -72,9 +72,16 @@ typings/
 # Serverless directories
 .serverless
 
+# Rush temporary files
+common/deploy/
+common/temp/
+common/autoinstallers/*/.npmrc
+**/.rush/temp/
+
 dist
 
 extension_dist
 *.zip
 
 src/app/config.ts
+
