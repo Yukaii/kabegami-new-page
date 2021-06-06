@@ -1,4 +1,4 @@
-require('./app/lib/webext-polyfill')
+import './app/lib/webext-polyfill'
 
 browser.runtime.onInstalled.addListener(function (details) {
   const isReasonInstall = details.reason === 'install'
