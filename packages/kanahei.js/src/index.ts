@@ -1,5 +1,5 @@
 import 'cross-fetch/polyfill'
-import cheerio = require('cheerio')
+import cheerio, { CheerioAPI } from 'cheerio'
 
 const kabegami = 'http://www.kanahei.com/kabegami/'
 
@@ -7,7 +7,7 @@ interface IWallpaper {
   images: string[]
 }
 
-function parsePagesCount ($: CheerioStatic): number {
+function parsePagesCount ($: CheerioAPI): number {
   const pageIndexes = $('.wp-pagenavi a.page')
                         .toArray()
                         .map(elem => parseInt($(elem).text(), 10))
@@ -35,10 +35,15 @@ async function fetchPage (url = kabegami) {
   }
 }
 
-function parseWallpapers ($: CheerioStatic): IWallpaper[] {
+function parseWallpapers ($: CheerioAPI): IWallpaper[] {
   return $('.col-xs-6.col-sm-4.col-md-3').toArray().map(elem => {
     const wallpaper = $(elem)
-    const images = wallpaper.find('a').toArray().map(elem => $(elem).attr('href'))
+    const images = wallpaper
+      .find('a')
+      .toArray()
+      .map(elem => $(elem).attr('href'))
+      // filter out calendar wallpaper
+      .filter(href => !href.match(/_c.jp(e)?g$/))
 
     return { images }
   })

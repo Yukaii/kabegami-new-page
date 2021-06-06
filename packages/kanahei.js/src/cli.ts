@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const wallpaper = require('wallpaper');
-const got = require('got');
-const tempfile = require('tempfile');
+import * as fs from 'fs';
+import * as path from 'path';
+import wallpaper from 'wallpaper';
+import got from 'got';
+import tempfile from 'tempfile';
 
 import { getOne } from '.'
 
@@ -18,7 +18,7 @@ const main = async () => {
     .stream(input)
     .pipe(fs.createWriteStream(file))
     .on('finish', () => {
-      wallpaper.set(file, {scale: true});
+      wallpaper.set(file, { scale: 'auto' });
     });
 }
 

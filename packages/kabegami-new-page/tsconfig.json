@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "rootDirs": [
+      "src",
+      "__tests__"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ],
+    "outDir": "dist"
+  },
+  "include": [
+    "src",
+    "__tests__"
+  ]
+}
