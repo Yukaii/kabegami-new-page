@@ -15,7 +15,18 @@
       "commandKind": "bulk",
       "name": "test",
       "summary": "Run unit test for each project",
-      "enableParallelism": true
+      "enableParallelism": true,
+      "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "build",
+      "summary": "Build all projects that haven't been built, or have changed since they were last built",
+      "safeForSimultaneousRushProcesses": false,
+      "enableParallelism": true,
+      "ignoreDependencyOrder": false,
+      "ignoreMissingScript": false,
+      "allowWarningsInSuccessfulBuild": true
     }
     // {
     //   /**
