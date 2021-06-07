@@ -10,6 +10,9 @@
   "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <16.0.0",
   "suppressNodeLtsWarning": true,
   "ensureConsistentVersions": true,
+  "pnpmOptions": {
+    "useWorkspaces": true
+  },
 
   "gitPolicy": {
   },

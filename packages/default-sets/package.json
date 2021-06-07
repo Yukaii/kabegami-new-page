@@ -17,6 +17,6 @@
     "jest": "^27.0.4",
     "@types/jest": "^26.0.23",
     "ts-jest": "^27.0.2",
-    "@kabegami-new-page/kanahei.js": "~1.0.0"
+    "@kabegami-new-page/kanahei.js": "workspace:~1.0.0"
   }
 }
