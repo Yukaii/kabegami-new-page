@@ -390,12 +390,13 @@
    */
   "projects": [
     {
-      "packageName": "@yukaii/kanahei.js",
+      "packageName": "@kabegami-new-page/kanahei.js",
       "projectFolder": "packages/kanahei.js"
     },
     {
       "packageName": "kabegami-new-page",
-      "projectFolder": "packages/kabegami-new-page"
+      "projectFolder": "packages/extension",
+      "shouldPublish": false
     }
     // {
     //   /**

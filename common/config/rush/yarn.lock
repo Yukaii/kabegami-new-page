@@ -492,7 +492,7 @@
 
 "@rush-temp/kabegami-new-page@file:./projects/kabegami-new-page.tgz":
   version "0.0.0"
-  resolved "file:./projects/kabegami-new-page.tgz#3a17e8e82dd1a2dc116627786f96fa1bdc006fc6"
+  resolved "file:./projects/kabegami-new-page.tgz#85519a06a32e800618517b7669a25bedd6f99214"
   dependencies:
     "@types/firefox-webext-browser" "82.0.0"
     "@types/jest" "^26.0.23"

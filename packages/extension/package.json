@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@xunlei/vue-context-menu": "^1.0.2",
-    "@yukaii/kanahei.js": "^1.0.0",
+    "@kabegami-new-page/kanahei.js": "^1.0.0",
     "axios": "^0.21.1",
     "localforage": "^1.9.0",
     "p-iteration": "^1.1.8",
