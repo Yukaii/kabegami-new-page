@@ -7,7 +7,7 @@
   "rushVersion": "5.47.0",
   "pnpmVersion": "6.7.2",
 
-  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <16.0.0",
+  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0",
   "suppressNodeLtsWarning": true,
   "ensureConsistentVersions": true,
   "pnpmOptions": {
