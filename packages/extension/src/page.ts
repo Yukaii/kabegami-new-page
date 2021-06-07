@@ -1,6 +1,6 @@
 import { CollectionStore, ImageStore, Configuration, IConfiguration } from './app/lib/store'
 import 'primer/index.scss';
-import { firstLoadRandomWallpaper } from './defaultSets';
+import { firstLoadRandomWallpaper } from '@kabegami-new-page/default-sets';
 
 let config : IConfiguration
 

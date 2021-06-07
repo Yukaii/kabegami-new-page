@@ -1,7 +1,7 @@
 import { uuid } from './utils';
 import * as localforge from 'localforage'
 import { mapSeries, forEachSeries } from 'p-iteration';
-import { defaultCollections } from '../../defaultSets';
+import { defaultCollections } from '@kabegami-new-page/default-sets';
 
 interface IModel extends Object {
   id?: string;

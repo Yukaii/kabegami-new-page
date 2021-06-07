@@ -1,6 +1,9 @@
-const kanaheiWallpapers = require('./kanahei.json')
+const kanaheiWallpapers: KanaheiWallpaper = require('../data/kanahei.json')
 
 type DefaultCollection = { name: string, images: string[] }
+type KanaheiWallpaper = Array<{
+  images: string[]
+}>
 
 export const defaultCollections: DefaultCollection[] = [{
     name: 'カナヘイ',
@@ -8,19 +11,19 @@ export const defaultCollections: DefaultCollection[] = [{
   },
   {
     name: 'Snoopy',
-    images: require('./snoopy.json')
+    images: require('../data/snoopy.json')
   },
   {
     name: 'Doraemon',
-    images: require('./doraemon.json')
+    images: require('../data/doraemon.json')
   },
   {
     name: 'ちびまる子ちゃん',
-    images: require('./chibimaruko.json')
+    images: require('../data/chibimaruko.json')
   },
   {
     name: 'Elmo',
-    images: require('./elmo.json')
+    images: require('../data/elmo.json')
   }
 ]
 

@@ -1,4 +1,4 @@
-import { firstLoadRandomWallpaper } from '../src/defaultSets'
+import { firstLoadRandomWallpaper } from '../src'
 
 describe('Test defaultSets', function () {
   it('#firstLoadRandomWallpaper', function () {

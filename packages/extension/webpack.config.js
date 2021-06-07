@@ -25,7 +25,7 @@ let webpackConfig = {
     new CopyWebpackPlugin([{
       from: '**/*',
       context: 'src',
-      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js', '*.example', 'defaultSets/*.json', '@types', '*.svg']
+      ignore: ['*.ts', '*.d.ts', '*.vue', '*.js', '*.example', '@types', '*.svg']
     }]),
     new MiniCssExtractPlugin({
       filename: '[name].css'
