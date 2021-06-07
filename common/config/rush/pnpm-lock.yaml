@@ -8600,7 +8600,7 @@ packages:
     dev: false
 
   file:projects/default-sets.tgz_ts-node@10.0.0:
-    resolution: {integrity: sha512-xFVyWEsHPkZzdxIG88CALhNkNtEdx2gUzI87VdqPHnDgPNWYuz7f5UCy+PqwjZ84Ujq04yDNlChLd9OqFXNXNQ==, tarball: file:projects/default-sets.tgz}
+    resolution: {integrity: sha512-0wK34Yt6BBFAvl8x25H34wZZQe/v2zbodRpu4qPPt7FwUg97bRgDgUlFdW/YryccqWhz0IHsYN+zg/WXjPGGzA==, tarball: file:projects/default-sets.tgz}
     id: file:projects/default-sets.tgz
     name: '@rush-temp/default-sets'
     version: 0.0.0
