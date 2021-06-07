@@ -1,5 +1,5 @@
 import { uuid } from './utils';
-import * as localforge from 'localforage'
+import localforge from 'localforage'
 import { mapSeries, forEachSeries } from 'p-iteration';
 import { defaultCollections } from '@kabegami-new-page/default-sets';
 

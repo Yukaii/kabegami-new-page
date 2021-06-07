@@ -15,7 +15,7 @@ const devMode = !(process.env.NODE_ENV === 'production');
 
 let webpackConfig = {
   mode: devMode ? 'development' : 'production',
-  devtool: 'source-map',
+  devtool: 'inline-cheap-source-map',
   entry: {
     page: './src/page',
     background: './src/background'
