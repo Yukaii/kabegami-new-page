@@ -16,7 +16,8 @@
       "name": "test",
       "summary": "Run unit test for each project",
       "enableParallelism": true,
-      "allowWarningsInSuccessfulBuild": true
+      "allowWarningsInSuccessfulBuild": true,
+      "ignoreMissingScript": true
     },
     {
       "commandKind": "bulk",
