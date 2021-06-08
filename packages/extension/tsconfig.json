@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "rootDirs": [
+      "src",
+      "__tests__"
+    ],
+    "types": [
+      "node",
+      "firefox-webext-browser"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ],
+    "outDir": "dist"
+  }
+}

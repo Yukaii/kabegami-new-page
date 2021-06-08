@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const fs = require('fs')
+
+const { getAll } = require('@kabegami-new-page/kanahei.js')
+
+;(async () => {
+  const wallpapers = await getAll()
+  fs.writeFileSync(path.join(__dirname, '../data/kanahei.json'), JSON.stringify(wallpapers))
+})();
+
