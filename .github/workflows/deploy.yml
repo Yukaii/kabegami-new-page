@@ -23,9 +23,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+
+    - name: Install rush
+      run: node common/scripts/install-run-rush.js install
+    - run: node common/scripts/install-run-rush.js test
+    - run: node common/scripts/install-run-rush.js build
+
     - name: Push to chrome webstore
       run: npm run ext:release
       env:
