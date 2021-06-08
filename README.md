@@ -4,13 +4,15 @@
 
 在新分頁隨機顯示桌布！
 
-[![Build Status](https://travis-ci.org/Yukaii/kabegami-new-page.svg?branch=develop)](https://travis-ci.org/Yukaii/kabegami-new-page) [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![time tracker](https://wakatime.com/badge/github/Yukaii/kabegami-new-page.svg)](https://wakatime.com/badge/github/Yukaii/kabegami-new-page)
+[![Build Status](https://github.com/Yukaii/kabegami-new-page/actions/workflows/build.yml/badge.svg)](https://github.com/Yukaii/kabegami-new-page/actions) [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fbbdincgjgdmbbkongmineooghpadbgk)][chrome-web-store] [![time tracker](https://wakatime.com/badge/github/Yukaii/kabegami-new-page.svg)](https://wakatime.com/badge/github/Yukaii/kabegami-new-page)
 
 [chrome-web-store]: https://chrome.google.com/webstore/detail/kanaheis-new-page/fbbdincgjgdmbbkongmineooghpadbgk
 
-## Screenshots
+## Video (Click to view on YouTube)
 
 [![Kanahei's New Page](https://cdn.rawgit.com/Yukaii/kanahei-wallpapers/127b5c1b/docs/images/demo.gif)](https://www.youtube.com/watch?v=06aZmi58VCc "Kanahei's New Page")
+
+## Screenshots
 
 ![Screenshots-1](./docs/screenshots/Screenshots-1.png)
 
@@ -20,37 +22,18 @@
 
 ## Changelog
 
-[Changelog 看這裡](https://hackmd.io/@yukai/kabegami-new-page)
+[Changelog](https://hackmd.io/@yukai/kabegami-new-page)
 
-## NPM Pakcage
+## NPM Packages
 
-[![npm](https://img.shields.io/npm/v/kanahei-wallpapers.svg)](https://www.npmjs.com/package/kanahei-wallpapers)
+This extension includes some goodies:
 
-```bash
-npm install -g kanahei-wallpapers
-```
+- [`@kabegami-new-page/kanahei.js`][kanahei-js]: Kanahei's wallpaper collection cralwer, with `kanahei` CLI tool that changes your wallpaper with just one command.
+- [`@kabegami-new-page/default-sets`][default-sets]: The default wallpapers set comes with Kabegami New Page.
 
-### CLI Tool
+[kanahei-js]: ./packages/kanahei.js/README.md
+[default-sets]: ./packages/default-sets/README.md
 
-```bash
-kanahei # this will change your wallpaper
-```
+## License
 
-### API
-
-```javascript
-const { getOne } = require('kanahei-wallpapers')
-
-getOne().then(wallpaper => console.log(wallpaper))
-```
-
-Will outputs:
-
-```javascript
-{ title: '湖のほとりの小鳥2',
-  images:
-   [ 'http://www.kanahei.com/upload/2016/06/2_k_1280_1024.jpg',
-     'http://www.kanahei.com/upload/2016/06/2_k_1600_1200.jpg',
-     'http://www.kanahei.com/upload/2016/06/2_k_1920_1200.jpg' ] }
-```
-
+MIT
