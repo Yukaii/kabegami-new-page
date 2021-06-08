@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@xunlei/vue-context-menu": "^1.0.2",
-    "@kabegami-new-page/default-sets": "workspace:~1.0.0",
+    "@kabegami-new-page/default-sets": "~1.0.0",
     "axios": "^0.21.1",
     "localforage": "^1.9.0",
     "p-iteration": "^1.1.8",
