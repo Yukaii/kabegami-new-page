@@ -14,7 +14,7 @@ describe('Test real crawler', function () {
 
     expect(Array.isArray(image.images))
     expect(typeof image.images[0]).toBe('string')
-  })
+  }, 30000)
 
   it('test #getOne', async function () {
     const image = await getOne()
