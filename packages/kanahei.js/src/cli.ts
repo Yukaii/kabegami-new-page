@@ -18,7 +18,7 @@ const main = async () => {
     .stream(input)
     .pipe(fs.createWriteStream(file))
     .on('finish', () => {
-      wallpaper.set(file, { scale: 'auto' });
+      wallpaper.set(file, { scale: 'auto', screen: 'all' });
     });
 }
 
