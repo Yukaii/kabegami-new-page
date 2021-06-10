@@ -3,3 +3,5 @@ __tests__
 tsconfig.json
 tsconfig.build.json
 jest.config.js
+.rush/temp
+_tmp_*

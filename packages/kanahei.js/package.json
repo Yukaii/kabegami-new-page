@@ -1,6 +1,6 @@
 {
   "name": "@kabegami-new-page/kanahei.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A utility to download all kanahei's wallpapers",
   "bin": {
     "kanahei": "dist/cli.js"
