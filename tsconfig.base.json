@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "inlineSourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+  },
+}

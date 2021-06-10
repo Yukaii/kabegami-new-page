@@ -1,0 +1,22 @@
+{
+  "name": "@kabegami-new-page/default-sets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "test": "jest",
+    "updateKanahei": "node bin/fetchWallpapers"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^15.12.1",
+    "typescript": "^4.3.2",
+    "jest": "^27.0.4",
+    "@types/jest": "^26.0.23",
+    "ts-jest": "^27.0.2",
+    "@kabegami-new-page/kanahei.js": "~1.0.0"
+  }
+}
