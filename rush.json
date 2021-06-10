@@ -48,11 +48,13 @@
   "projects": [
     {
       "packageName": "@kabegami-new-page/kanahei.js",
-      "projectFolder": "packages/kanahei.js"
+      "projectFolder": "packages/kanahei.js",
+      "shouldPublish": true
     },
     {
       "packageName": "@kabegami-new-page/default-sets",
-      "projectFolder": "packages/default-sets"
+      "projectFolder": "packages/default-sets",
+      "shouldPublish": true
     },
     {
       "packageName": "kabegami-new-page",
