@@ -31,8 +31,8 @@ This extension includes some goodies:
 - [`@kabegami-new-page/kanahei.js`][kanahei-js]: Kanahei's wallpaper collection cralwer, with `kanahei` CLI tool that changes your wallpaper with just one command.
 - [`@kabegami-new-page/default-sets`][default-sets]: The default wallpapers set comes with Kabegami New Page.
 
-[kanahei-js]: ./packages/kanahei.js/READMD.md
-[default-sets]: ./packages/default-sets/READMD.md
+[kanahei-js]: ./packages/kanahei.js/README.md
+[default-sets]: ./packages/default-sets/README.md
 
 ## License
 
